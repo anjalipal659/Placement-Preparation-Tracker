@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import data.model.StudyRecord;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -21,9 +23,32 @@ public class Main {
         switch (choice) {
 
     case 1:
-        System.out.println("Study Tracker selected");
-        break;
 
+    System.out.print("Enter Subject Name: ");
+    String subject = sc.nextLine();
+
+    System.out.print("Enter Hours Studied: ");
+    int hours = sc.nextInt();
+
+    System.out.print("Enter Today's Goal:");
+    sc.nextLine();
+    String goal = sc.nextLine();
+
+StudyRecord record = new StudyRecord();
+
+    record.subjectName = subject;
+    record.hoursStudied = hours;
+    record.todayGoal = goal;
+
+    System.out.println("\nStudy Record Saved Successfully!");
+    System.out.println("Subject : " + record.subjectName);
+    System.out.println("Hours   : " + record.hoursStudied);
+    System.out.println("Goal    : " + record.todayGoal);
+
+    System.out.print("Enter Today's Goal:");
+    
+   
+    break;
     case 2:
         System.out.println("Coding Tracker selected");
         break;
