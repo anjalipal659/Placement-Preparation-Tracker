@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import data.model.CodingRecord;
 import data.model.StudyRecord;
 
 public class Main {
@@ -50,9 +51,36 @@ StudyRecord record = new StudyRecord();
    
     break;
     case 2:
-        System.out.println("Coding Tracker selected");
-        break;
+        System.out.print("Enter Platform: ");
+sc.nextLine();
+String platform = sc.nextLine();
 
+System.out.print("Questions Solved Today: ");
+int questionsSolved = sc.nextInt();
+
+sc.nextLine();
+
+System.out.print("Enter Difficulty: ");
+String difficulty = sc.nextLine();
+
+System.out.print("Enter Current Streak: ");
+int currentStreak = sc.nextInt();
+
+CodingRecord codingRecord = new CodingRecord();
+
+codingRecord.platform = platform;
+codingRecord.questionsSolved = questionsSolved;
+codingRecord.difficulty = difficulty;
+codingRecord.currentStreak = currentStreak;
+
+System.out.println("\nCoding Record Saved Successfully!");
+
+System.out.println("Platform : " + codingRecord.platform);
+System.out.println("Questions: " + codingRecord.questionsSolved);
+System.out.println("Difficulty: " + codingRecord.difficulty);
+System.out.println("Streak : " + codingRecord.currentStreak);
+
+break;
     case 3:
         System.out.println("Company Tracker selected");
         break;
