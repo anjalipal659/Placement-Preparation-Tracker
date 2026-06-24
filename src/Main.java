@@ -2,12 +2,16 @@ import java.util.Scanner;
 
 import data.model.CodingRecord;
 import data.model.StudyRecord;
-
+import data.model.service.StudyService;
 public class Main {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        StudyService service = new StudyService();
+        boolean running = true;
+        while (running){
+        
 
         System.out.println("====================================");
         System.out.println("   Placement Preparation Tracker");
@@ -41,14 +45,9 @@ StudyRecord record = new StudyRecord();
     record.hoursStudied = hours;
     record.todayGoal = goal;
 
+    service.addRecord(record);
     System.out.println("\nStudy Record Saved Successfully!");
-    System.out.println("Subject : " + record.subjectName);
-    System.out.println("Hours   : " + record.hoursStudied);
-    System.out.println("Goal    : " + record.todayGoal);
-
-    System.out.print("Enter Today's Goal:");
-    
-   
+    service.showRecords();
     break;
     case 2:
         System.out.print("Enter Platform: ");
@@ -94,13 +93,16 @@ break;
         break;
 
     case 6:
-        System.out.println("Thank you! Exiting...");
+        System.out.println("\nThank you! for using Placement Preparati Tracker!");
+        System.out.println("Keep Learning, Keep Coding!");
+        running = false;
         break;
+        
 
     default:
         System.out.println("Invalid Choice");
 }
 
-        sc.close();
-    }
+       // sc.close();
 }
+}}
