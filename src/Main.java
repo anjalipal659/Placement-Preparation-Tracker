@@ -1,3 +1,5 @@
+import data.model.CompanyRecord;
+import data.model.service.CompanyService;
 import java.util.Scanner;
 
 import data.model.CodingRecord;
@@ -9,6 +11,7 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         StudyService service = new StudyService();
+        CompanyService companyService = new CompanyService();
         boolean running = true;
         while (running) {
             System.out.println();
@@ -88,8 +91,31 @@ System.out.println("Streak : " + codingRecord.currentStreak);
 
 break;
     case 3:
-        System.out.println("Company Tracker selected");
-        break;
+
+    sc.nextLine();
+
+    System.out.print("Enter Company Name: ");
+    String companyName = sc.nextLine();
+
+    System.out.print("Enter Role: ");
+    String role = sc.nextLine();
+
+    System.out.print("Enter Status: ");
+    String status = sc.nextLine();
+
+    CompanyRecord company = new CompanyRecord();
+
+    company.companyName = companyName;
+    company.role = role;
+    company.status = status;
+
+    companyService.addCompany(company);
+
+    System.out.println("\nCompany Record Saved Successfully!\n");
+
+    companyService.showCompanies();
+
+    break;
 
     case 4:
         System.out.println("Daily Planner selected");
