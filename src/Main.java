@@ -10,7 +10,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         StudyService service = new StudyService();
         boolean running = true;
-        while (running){
+        while (running) {
+            System.out.println();
         
 
         System.out.println("====================================");
@@ -29,8 +30,10 @@ public class Main {
 
     case 1:
 
-    System.out.print("Enter Subject Name: ");
-    String subject = sc.nextLine();
+    sc.nextLine();   
+
+System.out.print("Enter Subject Name: ");
+String subject = sc.nextLine();
 
     System.out.print("Enter Hours Studied: ");
     int hours = sc.nextInt();
@@ -45,7 +48,11 @@ StudyRecord record = new StudyRecord();
     record.hoursStudied = hours;
     record.todayGoal = goal;
 
-    service.addRecord(record);
+service.addRecord(record);
+System.out.println("DEBUG 1");
+System.out.println("Subject : " + record.subjectName);
+System.out.println("Hours   : " + record.hoursStudied);
+System.out.println("Goal    : " + record.todayGoal);
     System.out.println("\nStudy Record Saved Successfully!");
     service.showRecords();
     break;
@@ -93,7 +100,7 @@ break;
         break;
 
     case 6:
-        System.out.println("\nThank you! for using Placement Preparati Tracker!");
+        System.out.println("\nThank you for using Placement Preparation Tracker!");
         System.out.println("Keep Learning, Keep Coding!");
         running = false;
         break;
