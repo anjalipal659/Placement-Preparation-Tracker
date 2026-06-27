@@ -1,6 +1,14 @@
-import data.model.CompanyRecord;
-import data.model.service.CompanyService;
 import java.util.Scanner;
+import data.model.CodingRecord;
+import data.model.StudyRecord;
+import data.model.CompanyRecord;
+import data.model.service.StudyService;
+import data.model.service.CompanyService;
+import data.model.DailyPlannerRecord;
+import data.model.service.DailyPlannerService;
+import data.model.InterviewNote;
+import data.model.service.InterviewNoteService;
+
 
 import data.model.CodingRecord;
 import data.model.StudyRecord;
@@ -12,6 +20,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         StudyService service = new StudyService();
         CompanyService companyService = new CompanyService();
+        DailyPlannerService dailyPlannerService = new DailyPlannerService();
+        InterviewNoteService interviewNoteService = new InterviewNoteService();
         boolean running = true;
         while (running) {
             System.out.println();
@@ -117,13 +127,59 @@ break;
 
     break;
 
-    case 4:
-        System.out.println("Daily Planner selected");
-        break;
+   case 4:
+
+    sc.nextLine();
+
+    System.out.print("Enter Task: ");
+    String task = sc.nextLine();
+
+    System.out.print("Enter Time: ");
+    String time = sc.nextLine();
+
+    System.out.print("Enter Priority (High/Medium/Low): ");
+    String priority = sc.nextLine();
+
+    DailyPlannerRecord plan = new DailyPlannerRecord();
+
+    plan.task = task;
+    plan.time = time;
+    plan.priority = priority;
+
+    dailyPlannerService.addPlan(plan);
+
+    System.out.println("\nDaily Plan Saved Successfully!\n");
+
+    dailyPlannerService.showPlans();
+
+    break;
 
     case 5:
-        System.out.println("Interview Notes selected");
-        break;
+
+    sc.nextLine();
+
+    System.out.print("Enter Company Name: ");
+    String companyNameString = sc.nextLine();
+
+    System.out.print("Enter Interview Round: ");
+    String interviewRound = sc.nextLine();
+
+    System.out.print("Enter Notes: ");
+    String notes = sc.nextLine();
+
+    InterviewNote note = new InterviewNote();
+
+    note.companyName = companyNameString;
+    note.interviewRound = interviewRound;
+    note.notes = notes;
+
+    interviewNoteService.addNote(note);
+
+    System.out.println("\nInterview Note Saved Successfully!\n");
+
+    interviewNoteService.showNotes();
+
+    break;
 
     case 6:
         System.out.println("\nThank you for using Placement Preparation Tracker!");
