@@ -25,4 +25,7 @@ public class InterviewNoteService {
             System.out.println("Notes   : " + n.notes);
         }
     }
+    public int getTotalNotes(){
+        return interviewNotes.size();
+    }
 }

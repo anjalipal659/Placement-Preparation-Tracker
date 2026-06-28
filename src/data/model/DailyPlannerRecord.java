@@ -5,4 +5,5 @@ public class DailyPlannerRecord {
     public String time;
     public String priority;
     
+    
 }

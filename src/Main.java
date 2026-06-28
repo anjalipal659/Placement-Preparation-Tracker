@@ -8,6 +8,7 @@ import data.model.DailyPlannerRecord;
 import data.model.service.DailyPlannerService;
 import data.model.InterviewNote;
 import data.model.service.InterviewNoteService;
+import data.model.service.CodingService;
 
 
 import data.model.CodingRecord;
@@ -19,6 +20,7 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         StudyService service = new StudyService();
+        CodingService codingService = new CodingService();
         CompanyService companyService = new CompanyService();
         DailyPlannerService dailyPlannerService = new DailyPlannerService();
         InterviewNoteService interviewNoteService = new InterviewNoteService();
@@ -35,7 +37,8 @@ public class Main {
         System.out.println("3. Company Tracker");
         System.out.println("4. Daily Planner");
         System.out.println("5. Interview Notes");
-        System.out.println("6. Exit");
+        System.out.println("6. Dashboard");
+        System.out.println("7. Exit");
 
         System.out.print("Enter your choice: ");
         int choice = sc.nextInt();
@@ -69,6 +72,7 @@ System.out.println("Goal    : " + record.todayGoal);
     System.out.println("\nStudy Record Saved Successfully!");
     service.showRecords();
     break;
+
     case 2:
         System.out.print("Enter Platform: ");
 sc.nextLine();
@@ -91,6 +95,11 @@ codingRecord.platform = platform;
 codingRecord.questionsSolved = questionsSolved;
 codingRecord.difficulty = difficulty;
 codingRecord.currentStreak = currentStreak;
+codingService.addCodingRecord(codingRecord);
+
+System.out.println("\nCoding Record Saved Successfully!\n");
+
+codingService.showCodingRecords();
 
 System.out.println("\nCoding Record Saved Successfully!");
 
@@ -182,6 +191,20 @@ break;
     break;
 
     case 6:
+
+    System.out.println("\n========== DASHBOARD ==========");
+
+    System.out.println("Study Records     : " + service.getTotalRecords());
+    System.out.println("Companies Applied : " + companyService.getTotalCompanies());
+    System.out.println("Daily Plans       : " + dailyPlannerService.getTotalPlans());
+    System.out.println("Interview Notes   : " + interviewNoteService.getTotalNotes());
+    System.out.println("Coding Records    : " + codingService.getTotalCodingRecords());
+
+    System.out.println("===============================\n");
+
+    break;
+
+    case 7:
         System.out.println("\nThank you for using Placement Preparation Tracker!");
         System.out.println("Keep Learning, Keep Coding!");
         running = false;

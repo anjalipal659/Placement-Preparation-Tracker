@@ -31,4 +31,7 @@ public class DailyPlannerService {
 
         }
     }
+    public int getTotalPlans(){
+        return plannerRecords.size();
+    }
 }

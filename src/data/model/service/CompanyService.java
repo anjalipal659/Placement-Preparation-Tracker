@@ -25,4 +25,6 @@ public class CompanyService {
             System.out.println("Status  : " + c.status);
         }
     }
+    public int getTotalCompanies(){
+        return companyRecords.size();    }
 }

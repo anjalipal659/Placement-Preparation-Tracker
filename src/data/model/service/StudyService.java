@@ -19,4 +19,7 @@ public class StudyService {
         }
 
     }
+    public int getTotalRecords(){
+        return studyRecords.size();
+    }
 }

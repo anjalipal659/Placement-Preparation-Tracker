@@ -5,4 +5,5 @@ public class InterviewNote {
     public String interviewRound;
     public String notes;
     
+    
 }
