@@ -38,8 +38,11 @@ public class Main {
         System.out.println("4. Daily Planner");
         System.out.println("5. Interview Notes");
         System.out.println("6. Dashboard");
-        System.out.println("7. Exit");
-
+        System.out.println("7. Search Company");
+        System.out.println("8. Update Company Status");
+        System.out.println("9. Delete Company");
+        System.out.println("10. Exit");
+        
         System.out.print("Enter your choice: ");
         int choice = sc.nextInt();
         switch (choice) {
@@ -205,6 +208,42 @@ break;
     break;
 
     case 7:
+
+    sc.nextLine();
+
+    System.out.print("Enter Company Name to Search: ");
+    String searchCompany = sc.nextLine();
+
+    companyService.searchCompany(searchCompany);
+
+    break;
+
+    case 8:
+
+    sc.nextLine();
+
+    System.out.print("Enter Company Name: ");
+    String updateCompany = sc.nextLine();
+
+    System.out.print("Enter New Status: ");
+    String newStatus = sc.nextLine();
+
+    companyService.updateCompanyStatus(updateCompany, newStatus);
+
+    break;
+
+    case 9:
+
+    sc.nextLine();
+
+    System.out.print("Enter Company Name to Delete: ");
+    String deleteCompany = sc.nextLine();
+
+    companyService.deleteCompany(deleteCompany);
+
+    break;
+
+    case 10:
         System.out.println("\nThank you for using Placement Preparation Tracker!");
         System.out.println("Keep Learning, Keep Coding!");
         running = false;
