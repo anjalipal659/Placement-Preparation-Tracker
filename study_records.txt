@@ -1,0 +1,8 @@
+Subject : java
+Hours : 2
+Goal : complete
+--------------------------
+Subject : DSA
+Hours : 3
+Goal : Array
+--------------------------

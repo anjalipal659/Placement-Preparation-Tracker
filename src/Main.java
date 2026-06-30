@@ -74,6 +74,7 @@ System.out.println("Hours   : " + record.hoursStudied);
 System.out.println("Goal    : " + record.todayGoal);
     System.out.println("\nStudy Record Saved Successfully!");
     service.showRecords();
+    service.readRecords();
     break;
 
     case 2:
