@@ -6,3 +6,7 @@ Subject : DSA
 Hours : 3
 Goal : Array
 --------------------------
+Subject : oops
+Hours : 2
+Goal : complete
+--------------------------

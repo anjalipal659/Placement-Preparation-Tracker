@@ -42,23 +42,39 @@ public class StudyService {
         }
 
     }
-    public void readRecords() {
+    public void loadRecords() {
+
+    studyRecords.clear();
 
     try {
 
         BufferedReader reader = new BufferedReader(new FileReader("study_records.txt"));
 
-        String line;
+        String subject;
+        String hours;
+        String goal;
+        String separator;
 
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
+        while ((subject = reader.readLine()) != null) {
+
+            hours = reader.readLine();
+            goal = reader.readLine();
+            separator = reader.readLine();
+
+            StudyRecord record = new StudyRecord();
+
+            record.subjectName = subject.replace("Subject : ", "");
+            record.hoursStudied = Integer.parseInt(hours.replace("Hours : ", ""));
+            record.todayGoal = goal.replace("Goal : ", "");
+
+            studyRecords.add(record);
         }
 
         reader.close();
 
     } catch (IOException e) {
 
-        System.out.println("No File Found!");
+        // File first time run par nahi hogi
     }
 }
     public int getTotalRecords(){
