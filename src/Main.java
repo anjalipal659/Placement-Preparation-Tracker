@@ -19,14 +19,22 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+
         StudyService service = new StudyService();
         service.loadRecords();
+
         CodingService codingService = new CodingService();
         codingService.loadCodingRecords();
+
         CompanyService companyService = new CompanyService();
         companyService.loadCompanies();
+
         DailyPlannerService dailyPlannerService = new DailyPlannerService();
+        dailyPlannerService.loadPlans();
+
         InterviewNoteService interviewNoteService = new InterviewNoteService();
+        interviewNoteService.loadNotes();
+        
         boolean running = true;
         while (running) {
             System.out.println();

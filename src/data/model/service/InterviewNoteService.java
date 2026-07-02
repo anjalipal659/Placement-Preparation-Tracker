@@ -3,14 +3,35 @@ package data.model.service;
 import java.util.ArrayList;
 import data.model.InterviewNote;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+
 public class InterviewNoteService {
 
     ArrayList<InterviewNote> interviewNotes = new ArrayList<>();
 
     public void addNote(InterviewNote note) {
-        interviewNotes.add(note);
-    }
 
+    interviewNotes.add(note);
+
+    try {
+
+        FileWriter writer = new FileWriter("interview_notes.txt", true);
+
+        writer.write("Company : " + note.companyName + "\n");
+        writer.write("Round : " + note.interviewRound + "\n");
+        writer.write("Notes : " + note.notes + "\n");
+        writer.write("--------------------------\n");
+
+        writer.close();
+
+    } catch (IOException e) {
+
+        System.out.println("Error Saving File!");
+    }
+}
     public void showNotes() {
 
         if (interviewNotes.isEmpty()) {
@@ -25,6 +46,41 @@ public class InterviewNoteService {
             System.out.println("Notes   : " + n.notes);
         }
     }
+    public void loadNotes() {
+
+    interviewNotes.clear();
+
+    try {
+
+        BufferedReader reader = new BufferedReader(new FileReader("interview_notes.txt"));
+
+        String company;
+        String round;
+        String notes;
+        String separator;
+
+        while ((company = reader.readLine()) != null) {
+
+            round = reader.readLine();
+            notes = reader.readLine();
+            separator = reader.readLine();
+
+            InterviewNote note = new InterviewNote();
+
+            note.companyName = company.replace("Company : ", "");
+            note.interviewRound = round.replace("Round : ", "");
+            note.notes = notes.replace("Notes : ", "");
+
+            interviewNotes.add(note);
+        }
+
+        reader.close();
+
+    } catch (IOException e) {
+
+        // First run par file nahi hogi
+    }
+}
     public int getTotalNotes(){
         return interviewNotes.size();
     }
