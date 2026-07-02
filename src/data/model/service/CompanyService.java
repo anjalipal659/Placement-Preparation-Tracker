@@ -3,13 +3,35 @@ package data.model.service;
 import java.util.ArrayList;
 import data.model.CompanyRecord;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+
 public class CompanyService {
 
     ArrayList<CompanyRecord> companyRecords = new ArrayList<>();
 
     public void addCompany(CompanyRecord company) {
-        companyRecords.add(company);
+
+    companyRecords.add(company);
+
+    try {
+
+        FileWriter writer = new FileWriter("company_records.txt", true);
+
+        writer.write("Company : " + company.companyName + "\n");
+        writer.write("Role : " + company.role + "\n");
+        writer.write("Status : " + company.status + "\n");
+        writer.write("--------------------------\n");
+
+        writer.close();
+
+    } catch (IOException e) {
+
+        System.out.println("Error Saving File!");
     }
+}
 
     public void showCompanies() {
 
@@ -25,6 +47,62 @@ public class CompanyService {
             System.out.println("Status  : " + c.status);
         }
     }
+    public void loadCompanies() {
+
+    companyRecords.clear();
+
+    try {
+
+        BufferedReader reader = new BufferedReader(new FileReader("company_records.txt"));
+
+        String company;
+        String role;
+        String status;
+        String separator;
+
+        while ((company = reader.readLine()) != null) {
+
+            role = reader.readLine();
+            status = reader.readLine();
+            separator = reader.readLine();
+
+            CompanyRecord record = new CompanyRecord();
+
+            record.companyName = company.replace("Company : ", "");
+            record.role = role.replace("Role : ", "");
+            record.status = status.replace("Status : ", "");
+
+            companyRecords.add(record);
+        }
+
+        reader.close();
+
+    } catch (IOException e) {
+
+        // File first time run par nahi hogi
+    }
+}
+public void saveCompaniesToFile() {
+
+    try {
+
+        FileWriter writer = new FileWriter("company_records.txt");
+
+        for (CompanyRecord company : companyRecords) {
+
+            writer.write("Company : " + company.companyName + "\n");
+            writer.write("Role : " + company.role + "\n");
+            writer.write("Status : " + company.status + "\n");
+            writer.write("--------------------------\n");
+        }
+
+        writer.close();
+
+    } catch (IOException e) {
+
+        System.out.println("Error Saving File!");
+    }
+}
    public int getTotalCompanies() {
     return companyRecords.size();
 }
@@ -54,6 +132,7 @@ public void updateCompanyStatus(String companyName, String newStatus) {
         if (c.companyName.equalsIgnoreCase(companyName)) {
 
             c.status = newStatus;
+            saveCompaniesToFile();
 
             System.out.println("\nStatus Updated Successfully!");
             return;
@@ -69,6 +148,7 @@ public void deleteCompany(String companyName) {
         if (companyRecords.get(i).companyName.equalsIgnoreCase(companyName)) {
 
             companyRecords.remove(i);
+            saveCompaniesToFile();
 
             System.out.println("\nCompany Deleted Successfully!");
             return;

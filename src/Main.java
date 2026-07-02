@@ -22,7 +22,9 @@ public class Main {
         StudyService service = new StudyService();
         service.loadRecords();
         CodingService codingService = new CodingService();
+        codingService.loadCodingRecords();
         CompanyService companyService = new CompanyService();
+        companyService.loadCompanies();
         DailyPlannerService dailyPlannerService = new DailyPlannerService();
         InterviewNoteService interviewNoteService = new InterviewNoteService();
         boolean running = true;
@@ -105,12 +107,6 @@ System.out.println("\nCoding Record Saved Successfully!\n");
 
 codingService.showCodingRecords();
 
-System.out.println("\nCoding Record Saved Successfully!");
-
-System.out.println("Platform : " + codingRecord.platform);
-System.out.println("Questions: " + codingRecord.questionsSolved);
-System.out.println("Difficulty: " + codingRecord.difficulty);
-System.out.println("Streak : " + codingRecord.currentStreak);
 
 break;
     case 3:
