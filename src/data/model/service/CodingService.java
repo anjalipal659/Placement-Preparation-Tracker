@@ -92,4 +92,16 @@ public class CodingService {
     public int getTotalCodingRecords() {
         return codingRecords.size();
     }
+
+    public int getTotalQuestionsSolved() {
+
+    int totalQuestions = 0;
+
+    for (CodingRecord record : codingRecords) {
+
+        totalQuestions += record.questionsSolved;
+    }
+
+    return totalQuestions;
+}
 }

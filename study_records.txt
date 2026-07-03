@@ -1,16 +1,5 @@
-Subject : java
+Date & Time : 03-07-2026 01:43 pm
+Subject : DBMS
 Hours : 2
-Goal : complete
---------------------------
-Subject : DSA
-Hours : 3
-Goal : Array
---------------------------
-Subject : oops
-Hours : 2
-Goal : complete
---------------------------
-Subject : oops
-Hours : 2
-Goal : complete
+Goal : Normalization
 --------------------------

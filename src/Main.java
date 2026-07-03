@@ -199,18 +199,31 @@ break;
     break;
 
     case 6:
+        System.out.println("\n========== DASHBOARD ==========");
 
-    System.out.println("\n========== DASHBOARD ==========");
+System.out.println("Study Records       : " + service.getTotalRecords());
+System.out.println("Total Study Hours   : " + service.getTotalStudyHours());
 
-    System.out.println("Study Records     : " + service.getTotalRecords());
-    System.out.println("Companies Applied : " + companyService.getTotalCompanies());
-    System.out.println("Daily Plans       : " + dailyPlannerService.getTotalPlans());
-    System.out.println("Interview Notes   : " + interviewNoteService.getTotalNotes());
-    System.out.println("Coding Records    : " + codingService.getTotalCodingRecords());
+System.out.println();
 
-    System.out.println("===============================\n");
+System.out.println("Coding Records      : " + codingService.getTotalCodingRecords());
+System.out.println("Questions Solved    : " + codingService.getTotalQuestionsSolved());
 
-    break;
+System.out.println();
+
+System.out.println("Companies Applied   : " + companyService.getTotalCompanies());
+System.out.println("Selected Companies  : " + companyService.getSelectedCompanies());
+System.out.println("Rejected Companies  : " + companyService.getRejectedCompanies());
+System.out.println("Pending Companies   : " + companyService.getPendingCompanies());
+
+System.out.println();
+
+System.out.println("Daily Plans         : " + dailyPlannerService.getTotalPlans());
+System.out.println("Interview Notes     : " + interviewNoteService.getTotalNotes());
+
+System.out.println("===============================\n");
+
+    
 
     case 7:
 

@@ -107,6 +107,50 @@ public void saveCompaniesToFile() {
     return companyRecords.size();
 }
 
+public int getSelectedCompanies() {
+
+    int count = 0;
+
+    for (CompanyRecord company : companyRecords) {
+
+        if (company.status.equalsIgnoreCase("Selected")) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+public int getRejectedCompanies() {
+
+    int count = 0;
+
+    for (CompanyRecord company : companyRecords) {
+
+        if (company.status.equalsIgnoreCase("Rejected")) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+public int getPendingCompanies() {
+
+    int count = 0;
+
+    for (CompanyRecord company : companyRecords) {
+
+        if (company.status.equalsIgnoreCase("Applied") ||
+            company.status.equalsIgnoreCase("Pending")) {
+
+            count++;
+        }
+    }
+
+    return count;
+}
+
 public void searchCompany(String companyName) {
 
     for (CompanyRecord c : companyRecords) {
