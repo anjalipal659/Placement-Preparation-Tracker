@@ -5,5 +5,6 @@ public class CodingRecord {
     public int questionsSolved;
     public String difficulty;
     public int currentStreak;
+    public String dateTime;
     
 }
