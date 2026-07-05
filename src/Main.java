@@ -11,12 +11,14 @@ import data.model.service.InterviewNoteService;
 import data.model.service.CodingService;
 
 
+
 import data.model.CodingRecord;
 import data.model.StudyRecord;
 import data.model.service.StudyService;
 public class Main {
 
     public static void main(String[] args) {
+
 
         Scanner sc = new Scanner(System.in);
 
@@ -38,6 +40,7 @@ public class Main {
         boolean running = true;
         while (running) {
             System.out.println();
+            
         
 
         System.out.println("====================================");
