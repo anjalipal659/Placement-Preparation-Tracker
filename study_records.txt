@@ -3,3 +3,8 @@ Subject : DBMS
 Hours : 2
 Goal : Normalization
 --------------------------
+Date & Time : 05-07-2026 04:00 pm
+Subject : java
+Hours : 2
+Goal : oops
+--------------------------

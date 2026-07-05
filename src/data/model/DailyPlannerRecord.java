@@ -4,6 +4,7 @@ public class DailyPlannerRecord {
     public String task;
     public String time;
     public String priority;
+    public String dateTime;
     
     
 }

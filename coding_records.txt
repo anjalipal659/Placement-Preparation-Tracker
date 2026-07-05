@@ -4,3 +4,9 @@ Questions : 5
 Difficulty : 12
 Streak : 12
 --------------------------
+Date & Time : 05-07-2026 04:00 pm
+Platform : leetcode
+Questions : 2
+Difficulty : easy
+Streak : 16
+--------------------------

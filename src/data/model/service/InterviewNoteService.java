@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class InterviewNoteService {
 
@@ -16,10 +18,14 @@ public class InterviewNoteService {
 
     interviewNotes.add(note);
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a");
+note.dateTime = LocalDateTime.now().format(formatter);
+
     try {
 
         FileWriter writer = new FileWriter("interview_notes.txt", true);
 
+        writer.write("Date & Time : " + note.dateTime + "\n");
         writer.write("Company : " + note.companyName + "\n");
         writer.write("Round : " + note.interviewRound + "\n");
         writer.write("Notes : " + note.notes + "\n");
@@ -41,6 +47,7 @@ public class InterviewNoteService {
 
         for (InterviewNote n : interviewNotes) {
             System.out.println("--------------------------------------");
+            System.out.println("Date & Time : " + n.dateTime);
             System.out.println("Company : " + n.companyName);
             System.out.println("Round   : " + n.interviewRound);
             System.out.println("Notes   : " + n.notes);
@@ -54,19 +61,22 @@ public class InterviewNoteService {
 
         BufferedReader reader = new BufferedReader(new FileReader("interview_notes.txt"));
 
+        String dateTime;
         String company;
         String round;
         String notes;
         String separator;
 
-        while ((company = reader.readLine()) != null) {
+        while ((dateTime = reader.readLine()) != null) {
 
+            company = reader.readLine();
             round = reader.readLine();
             notes = reader.readLine();
             separator = reader.readLine();
 
             InterviewNote note = new InterviewNote();
 
+            note.dateTime = dateTime.replace("Date & Time : ", "");
             note.companyName = company.replace("Company : ", "");
             note.interviewRound = round.replace("Round : ", "");
             note.notes = notes.replace("Notes : ", "");

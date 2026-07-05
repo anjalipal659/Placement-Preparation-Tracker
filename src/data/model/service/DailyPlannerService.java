@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 
@@ -19,10 +21,13 @@ public class DailyPlannerService {
 
     plannerRecords.add(plan);
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a");
+plan.dateTime = LocalDateTime.now().format(formatter);
+
     try {
 
         FileWriter writer = new FileWriter("daily_plans.txt", true);
-
+        writer.write("Date & Time : " + plan.dateTime + "\n");
         writer.write("Task : " + plan.task + "\n");
         writer.write("Time : " + plan.time + "\n");
         writer.write("Priority : " + plan.priority + "\n");
@@ -46,6 +51,7 @@ public class DailyPlannerService {
         for (DailyPlannerRecord p : plannerRecords) {
 
             System.out.println("--------------------------------------");
+            System.out.println("Date & Time : " + p.dateTime);
             System.out.println("Task     : " + p.task);
             System.out.println("Time     : " + p.time);
             System.out.println("Priority : " + p.priority);
@@ -59,20 +65,21 @@ public class DailyPlannerService {
     try {
 
         BufferedReader reader = new BufferedReader(new FileReader("daily_plans.txt"));
-
+        String dateTime;
         String task;
         String time;
         String priority;
         String separator;
 
-        while ((task = reader.readLine()) != null) {
-
+        while ((dateTime = reader.readLine()) != null) {
+            task = reader.readLine();
             time = reader.readLine();
             priority = reader.readLine();
             separator = reader.readLine();
 
             DailyPlannerRecord plan = new DailyPlannerRecord();
 
+            plan.dateTime = dateTime.replace("Date & Time : ", "");
             plan.task = task.replace("Task : ", "");
             plan.time = time.replace("Time : ", "");
             plan.priority = priority.replace("Priority : ", "");

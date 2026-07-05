@@ -8,8 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import data.model.CodingRecord;
-import java.util.ArrayList;
-import data.model.CodingRecord;
+
 
 public class CodingService {
 

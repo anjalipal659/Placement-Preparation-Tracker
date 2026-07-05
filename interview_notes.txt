@@ -1,8 +1,5 @@
-Company : TCS
-Round : Technical
-Notes : Java OOP Questions
---------------------------
-Company : Infosys
-Round : HR
-Notes : Confidence
+Date & Time : 05-07-2026 04:02 pm
+Company : oracle
+Round : 2
+Notes : java
 --------------------------

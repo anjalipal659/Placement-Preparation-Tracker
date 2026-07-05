@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CompanyService {
 
@@ -16,10 +18,14 @@ public class CompanyService {
 
     companyRecords.add(company);
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a");
+company.appliedDate = LocalDateTime.now().format(formatter);
+
     try {
 
         FileWriter writer = new FileWriter("company_records.txt", true);
 
+        writer.write("Applied Date : " + company.appliedDate + "\n");
         writer.write("Company : " + company.companyName + "\n");
         writer.write("Role : " + company.role + "\n");
         writer.write("Status : " + company.status + "\n");
@@ -42,6 +48,7 @@ public class CompanyService {
 
         for (CompanyRecord c : companyRecords) {
             System.out.println("--------------------------------------");
+            System.out.println("Applied Date : " + c.appliedDate);
             System.out.println("Company : " + c.companyName);
             System.out.println("Role    : " + c.role);
             System.out.println("Status  : " + c.status);
@@ -54,20 +61,21 @@ public class CompanyService {
     try {
 
         BufferedReader reader = new BufferedReader(new FileReader("company_records.txt"));
-
+        String appliedDate;
         String company;
         String role;
         String status;
         String separator;
 
-        while ((company = reader.readLine()) != null) {
-
+        while ((appliedDate = reader.readLine()) != null) {
+            company = reader.readLine();
             role = reader.readLine();
             status = reader.readLine();
             separator = reader.readLine();
 
             CompanyRecord record = new CompanyRecord();
 
+            record.appliedDate = appliedDate.replace("Applied Date : ", "");
             record.companyName = company.replace("Company : ", "");
             record.role = role.replace("Role : ", "");
             record.status = status.replace("Status : ", "");
@@ -90,6 +98,7 @@ public void saveCompaniesToFile() {
 
         for (CompanyRecord company : companyRecords) {
 
+            writer.write("Applied Date : " + company.appliedDate + "\n");
             writer.write("Company : " + company.companyName + "\n");
             writer.write("Role : " + company.role + "\n");
             writer.write("Status : " + company.status + "\n");
