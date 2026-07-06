@@ -1,58 +1,83 @@
 package gui;
+
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainFrame extends JFrame {
 
     public MainFrame() {
 
         setTitle("Placement Preparation Tracker");
-
         setSize(800, 600);
-
         setLocationRelativeTo(null);
         setLayout(null);
         getContentPane().setBackground(new Color(240, 248, 255));
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Title
         JLabel title = new JLabel("Placement Preparation Tracker");
+        title.setBounds(180, 30, 500, 40);
+        title.setFont(new Font("Arial", Font.BOLD, 24));
+        add(title);
 
-title.setBounds(180, 30, 500, 40);
+        // Buttons
+        JButton studyButton = new JButton("Study Tracker");
+        studyButton.setBounds(250, 100, 250, 35);
+        add(studyButton);
 
-title.setFont(new Font("Arial", Font.BOLD, 24));
+        studyButton.addActionListener(new ActionListener() {
 
-add(title);
-JButton studyButton = new JButton("Study Tracker");
-studyButton.setBounds(250, 100, 250, 35);
-add(studyButton);
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-JButton codingButton = new JButton("Coding Tracker");
-codingButton.setBounds(250, 150, 250, 35);
-add(codingButton);
+        new StudyFrame();
 
-JButton companyButton = new JButton("Company Tracker");
-companyButton.setBounds(250, 200, 250, 35);
-add(companyButton);
+    }
+});
 
-JButton plannerButton = new JButton("Daily Planner");
-plannerButton.setBounds(250, 250, 250, 35);
-add(plannerButton);
+        JButton codingButton = new JButton("Coding Tracker");
+        codingButton.setBounds(250, 150, 250, 35);
+        add(codingButton);
 
-JButton interviewButton = new JButton("Interview Notes");
-interviewButton.setBounds(250, 300, 250, 35);
-add(interviewButton);
+        JButton companyButton = new JButton("Company Tracker");
+        companyButton.setBounds(250, 200, 250, 35);
+        add(companyButton);
 
-JButton dashboardButton = new JButton("Dashboard");
-dashboardButton.setBounds(250, 350, 250, 35);
-add(dashboardButton);
+        JButton plannerButton = new JButton("Daily Planner");
+        plannerButton.setBounds(250, 250, 250, 35);
+        add(plannerButton);
 
-JButton exitButton = new JButton("Exit");
-exitButton.setBounds(250, 420, 250, 35);
-add(exitButton);
+        JButton interviewButton = new JButton("Interview Notes");
+        interviewButton.setBounds(250, 300, 250, 35);
+        add(interviewButton);
+
+        JButton dashboardButton = new JButton("Dashboard");
+        dashboardButton.setBounds(250, 350, 250, 35);
+        add(dashboardButton);
+
+        JButton exitButton = new JButton("Exit");
+        exitButton.setBounds(250, 420, 250, 35);
+        add(exitButton);
+
+        // Exit Button Action
+        exitButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                System.exit(0);
+
+            }
+        });
 
         setVisible(true);
     }
