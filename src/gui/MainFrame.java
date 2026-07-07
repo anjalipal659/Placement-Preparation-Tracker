@@ -48,9 +48,29 @@ public class MainFrame extends JFrame {
         codingButton.setBounds(250, 150, 250, 35);
         add(codingButton);
 
+        codingButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        new CodingFrame();
+
+    }
+});
+
         JButton companyButton = new JButton("Company Tracker");
         companyButton.setBounds(250, 200, 250, 35);
         add(companyButton);
+
+        companyButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        new CompanyFrame();
+
+    }
+});
 
         JButton plannerButton = new JButton("Daily Planner");
         plannerButton.setBounds(250, 250, 250, 35);
