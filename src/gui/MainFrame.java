@@ -90,9 +90,29 @@ public class MainFrame extends JFrame {
         interviewButton.setBounds(250, 300, 250, 35);
         add(interviewButton);
 
+        interviewButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        new InterviewNoteFrame();
+
+    }
+});
+
         JButton dashboardButton = new JButton("Dashboard");
         dashboardButton.setBounds(250, 350, 250, 35);
         add(dashboardButton);
+
+        dashboardButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        new DashboardFrame();
+
+    }
+});
 
         JButton exitButton = new JButton("Exit");
         exitButton.setBounds(250, 420, 250, 35);
