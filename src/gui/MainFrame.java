@@ -76,6 +76,16 @@ public class MainFrame extends JFrame {
         plannerButton.setBounds(250, 250, 250, 35);
         add(plannerButton);
 
+        plannerButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        new DailyPlannerFrame();
+
+    }
+});
+
         JButton interviewButton = new JButton("Interview Notes");
         interviewButton.setBounds(250, 300, 250, 35);
         add(interviewButton);
