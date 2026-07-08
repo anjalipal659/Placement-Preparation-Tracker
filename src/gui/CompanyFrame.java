@@ -61,24 +61,25 @@ public class CompanyFrame extends JFrame {
         statusField.setBounds(180, 180, 250, 25);
         add(statusField);
 
-        // Applied Date
-        JLabel dateLabel = new JLabel("Applied Date");
-        dateLabel.setBounds(50, 230, 120, 25);
-        add(dateLabel);
-
-        JTextField dateField = new JTextField();
-        dateField.setBounds(180, 230, 250, 25);
-        add(dateField);
-
         // Save Button
         JButton saveButton = new JButton("Save");
-        saveButton.setBounds(190, 300, 120, 35);
+        saveButton.setBounds(200, 300, 120, 35);
         add(saveButton);
 
         saveButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                if (companyField.getText().isEmpty()
+        || roleField.getText().isEmpty()
+        || statusField.getText().isEmpty()) {
+
+    JOptionPane.showMessageDialog(null,
+            "Please fill all fields!");
+
+    return;
+}
 
                 CompanyRecord record = new CompanyRecord();
 
@@ -95,7 +96,7 @@ public class CompanyFrame extends JFrame {
                 companyField.setText("");
                 roleField.setText("");
                 statusField.setText("");
-                dateField.setText("");
+                
             }
         });
 
