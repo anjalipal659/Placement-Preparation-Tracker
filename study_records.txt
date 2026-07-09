@@ -18,3 +18,8 @@ Subject : oops
 Hours : 2
 Goal : complete
 --------------------------
+Date & Time : 09-07-2026 09:10 pm
+Subject : DBMS
+Hours : 2
+Goal : Normalization
+--------------------------

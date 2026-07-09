@@ -101,5 +101,7 @@ while ((dateTime = reader.readLine()) != null) {
 
     return totalHours;
 }
-    
+    public ArrayList<StudyRecord> getAllRecords() {
+    return studyRecords;
+}
 }

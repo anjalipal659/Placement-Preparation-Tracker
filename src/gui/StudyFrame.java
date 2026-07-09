@@ -66,6 +66,20 @@ saveButton.setBounds(170, 250, 120, 35);
 
 add(saveButton);
 
+JButton showButton = new JButton("Show Records");
+showButton.setBounds(300, 250, 140, 35);
+add(showButton);
+
+showButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        new ShowStudyRecordsFrame();
+
+    }
+});
+
 saveButton.addActionListener(new ActionListener() {
 
     @Override

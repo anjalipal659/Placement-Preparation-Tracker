@@ -112,4 +112,7 @@ record.dateTime = LocalDateTime.now().format(formatter);
 
     return totalQuestions;
 }
+public ArrayList<CodingRecord> getAllCodingRecords() {
+    return codingRecords;
+}
 }

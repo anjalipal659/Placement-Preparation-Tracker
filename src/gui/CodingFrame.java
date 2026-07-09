@@ -1,13 +1,17 @@
 package gui;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
-import data.model.service.CodingService;
-
-import javax.swing.JButton;
-import java.awt.Font;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import data.model.CodingRecord;
+import data.model.service.CodingService;
 
 public class CodingFrame extends JFrame {
 
@@ -22,54 +26,116 @@ public class CodingFrame extends JFrame {
         setLayout(null);
 
         CodingService codingService = new CodingService();
-codingService.loadCodingRecords();
+        codingService.loadCodingRecords();
 
         // Title
-JLabel title = new JLabel("Coding Tracker");
-title.setBounds(150, 20, 250, 30);
-title.setFont(new Font("Arial", Font.BOLD, 20));
-add(title);
+        JLabel title = new JLabel("Coding Tracker");
+        title.setBounds(150, 20, 250, 30);
+        title.setFont(new Font("Arial", Font.BOLD, 20));
+        add(title);
 
-// Platform
-JLabel platformLabel = new JLabel("Platform");
-platformLabel.setBounds(50, 80, 100, 25);
-add(platformLabel);
+        // Platform
+        JLabel platformLabel = new JLabel("Platform");
+        platformLabel.setBounds(50, 80, 100, 25);
+        add(platformLabel);
 
-JTextField platformField = new JTextField();
-platformField.setBounds(170, 80, 220, 25);
-add(platformField);
+        JTextField platformField = new JTextField();
+        platformField.setBounds(170, 80, 220, 25);
+        add(platformField);
 
-// Questions
-JLabel questionsLabel = new JLabel("Questions");
-questionsLabel.setBounds(50, 130, 100, 25);
-add(questionsLabel);
+        // Questions
+        JLabel questionsLabel = new JLabel("Questions");
+        questionsLabel.setBounds(50, 130, 100, 25);
+        add(questionsLabel);
 
-JTextField questionsField = new JTextField();
-questionsField.setBounds(170, 130, 220, 25);
-add(questionsField);
+        JTextField questionsField = new JTextField();
+        questionsField.setBounds(170, 130, 220, 25);
+        add(questionsField);
 
-// Difficulty
-JLabel difficultyLabel = new JLabel("Difficulty");
-difficultyLabel.setBounds(50, 180, 100, 25);
-add(difficultyLabel);
+        // Difficulty
+        JLabel difficultyLabel = new JLabel("Difficulty");
+        difficultyLabel.setBounds(50, 180, 100, 25);
+        add(difficultyLabel);
 
-JTextField difficultyField = new JTextField();
-difficultyField.setBounds(170, 180, 220, 25);
-add(difficultyField);
+        JTextField difficultyField = new JTextField();
+        difficultyField.setBounds(170, 180, 220, 25);
+        add(difficultyField);
 
-// Streak
-JLabel streakLabel = new JLabel("Streak");
-streakLabel.setBounds(50, 230, 100, 25);
-add(streakLabel);
+        // Streak
+        JLabel streakLabel = new JLabel("Streak");
+        streakLabel.setBounds(50, 230, 100, 25);
+        add(streakLabel);
 
-JTextField streakField = new JTextField();
-streakField.setBounds(170, 230, 220, 25);
-add(streakField);
+        JTextField streakField = new JTextField();
+        streakField.setBounds(170, 230, 220, 25);
+        add(streakField);
 
-// Save Button
-JButton saveButton = new JButton("Save");
-saveButton.setBounds(170, 300, 120, 35);
-add(saveButton);
+        // Save Button
+        JButton saveButton = new JButton("Save");
+        saveButton.setBounds(80, 300, 120, 35);
+        add(saveButton);
+
+        // Show Records Button
+        JButton showButton = new JButton("Show Records");
+        showButton.setBounds(230, 300, 150, 35);
+        add(showButton);
+
+        // Save Button Action
+        saveButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                try {
+
+                    if (platformField.getText().isEmpty()
+                            || questionsField.getText().isEmpty()
+                            || difficultyField.getText().isEmpty()
+                            || streakField.getText().isEmpty()) {
+
+                        JOptionPane.showMessageDialog(null,
+                                "Please fill all fields!");
+
+                        return;
+                    }
+
+                    CodingRecord record = new CodingRecord();
+
+                    record.platform = platformField.getText();
+                    record.questionsSolved = Integer.parseInt(questionsField.getText());
+                    record.difficulty = difficultyField.getText();
+                  record.currentStreak = Integer.parseInt(streakField.getText());
+
+                    codingService.addCodingRecord(record);
+
+                    JOptionPane.showMessageDialog(null,
+                            "Coding Record Saved Successfully!");
+
+                    platformField.setText("");
+                    questionsField.setText("");
+                    difficultyField.setText("");
+                    streakField.setText("");
+
+                } catch (NumberFormatException ex) {
+
+                    JOptionPane.showMessageDialog(null,
+                            "Please enter valid numbers!");
+
+                }
+
+            }
+        });
+
+        // Show Records Button Action
+        showButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                new ShowCodingRecordsFrame();
+
+            }
+        });
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
