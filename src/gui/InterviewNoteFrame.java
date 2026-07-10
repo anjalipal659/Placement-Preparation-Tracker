@@ -66,6 +66,10 @@ public class InterviewNoteFrame extends JFrame {
         saveButton.setBounds(170, 250, 120, 35);
         add(saveButton);
 
+        JButton showButton = new JButton("Show Records");
+showButton.setBounds(310, 250, 140, 35);
+add(showButton);
+
         saveButton.addActionListener(new ActionListener() {
 
             @Override
@@ -97,6 +101,16 @@ public class InterviewNoteFrame extends JFrame {
                 notesField.setText("");
             }
         });
+
+        showButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        new ShowInterviewNotesFrame();
+
+    }
+});
 
         setVisible(true);
     }

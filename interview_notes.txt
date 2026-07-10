@@ -8,3 +8,13 @@ Company : IBM
 Round : Technical
 Notes : Asked Java and SQL
 --------------------------
+Date & Time : 10-07-2026 09:34 pm
+Company : TCS
+Round : Technical
+Notes : Java
+--------------------------
+Date & Time : 10-07-2026 09:37 pm
+Company : IBM
+Round : HR
+Notes : Python
+--------------------------

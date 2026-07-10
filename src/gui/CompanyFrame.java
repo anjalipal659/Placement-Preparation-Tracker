@@ -66,10 +66,15 @@ public class CompanyFrame extends JFrame {
         saveButton.setBounds(200, 300, 120, 35);
         add(saveButton);
 
+       JButton showButton = new JButton("Show Records");
+showButton.setBounds(320, 300, 150, 35);
+add(showButton);
+
         saveButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+
 
                 if (companyField.getText().isEmpty()
         || roleField.getText().isEmpty()
@@ -99,6 +104,16 @@ public class CompanyFrame extends JFrame {
                 
             }
         });
+
+        showButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        new ShowCompanyRecordsFrame();
+
+    }
+});
 
         setVisible(true);
     }

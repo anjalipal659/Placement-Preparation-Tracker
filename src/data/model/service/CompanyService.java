@@ -210,4 +210,8 @@ public void deleteCompany(String companyName) {
 
     System.out.println("Company Not Found!");
 }
+
+public ArrayList<CompanyRecord> getAllCompanies() {
+    return companyRecords;
+}
 }

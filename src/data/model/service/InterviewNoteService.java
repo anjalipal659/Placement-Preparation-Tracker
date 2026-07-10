@@ -94,4 +94,8 @@ note.dateTime = LocalDateTime.now().format(formatter);
     public int getTotalNotes(){
         return interviewNotes.size();
     }
+
+    public ArrayList<InterviewNote> getAllNotes() {
+    return interviewNotes;
+}
 }

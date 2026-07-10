@@ -97,4 +97,8 @@ plan.dateTime = LocalDateTime.now().format(formatter);
     public int getTotalPlans(){
         return plannerRecords.size();
     }
+
+    public ArrayList<DailyPlannerRecord> getAllPlans() {
+    return plannerRecords;
+}
 }
