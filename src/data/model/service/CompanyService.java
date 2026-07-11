@@ -160,23 +160,16 @@ public int getPendingCompanies() {
     return count;
 }
 
-public void searchCompany(String companyName) {
+public CompanyRecord searchCompany(String companyName) {
 
     for (CompanyRecord c : companyRecords) {
 
         if (c.companyName.equalsIgnoreCase(companyName)) {
-
-            System.out.println("\n========= SEARCH RESULT =========");
-            System.out.println("Company : " + c.companyName);
-            System.out.println("Role    : " + c.role);
-            System.out.println("Status  : " + c.status);
-            System.out.println("================================");
-
-            return;
+            return c;
         }
     }
 
-    System.out.println("Company Not Found!");
+    return null;
 }
 public void updateCompanyStatus(String companyName, String newStatus) {
 

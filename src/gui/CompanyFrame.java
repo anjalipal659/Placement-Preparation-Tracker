@@ -63,12 +63,25 @@ public class CompanyFrame extends JFrame {
 
         // Save Button
         JButton saveButton = new JButton("Save");
-        saveButton.setBounds(200, 300, 120, 35);
+        saveButton.setBounds(170, 300, 110, 35);
+
         add(saveButton);
 
        JButton showButton = new JButton("Show Records");
-showButton.setBounds(320, 300, 150, 35);
+showButton.setBounds(320, 300, 170, 35);
 add(showButton);
+
+JButton searchButton = new JButton("Search");
+searchButton.setBounds(20, 300, 110, 35);
+add(searchButton);
+
+JButton updateButton = new JButton("Update");
+updateButton.setBounds(500, 300, 110, 35);
+add(updateButton);
+
+JButton deleteButton = new JButton("Delete");
+deleteButton.setBounds(20, 350, 110, 35);
+add(deleteButton);
 
         saveButton.addActionListener(new ActionListener() {
 
@@ -112,6 +125,87 @@ add(showButton);
 
         new ShowCompanyRecordsFrame();
 
+    }
+});
+
+searchButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        CompanyRecord company = companyService.searchCompany(companyField.getText());
+
+if (company != null) {
+
+    JOptionPane.showMessageDialog(null,
+            "Company : " + company.companyName +
+            "\nRole : " + company.role +
+            "\nStatus : " + company.status +
+            "\nApplied Date : " + company.appliedDate);
+
+} else {
+
+    JOptionPane.showMessageDialog(null,
+            "Company Not Found!");
+
+}
+
+    }
+});
+
+updateButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (companyField.getText().isEmpty() || statusField.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Enter Company Name and New Status!");
+
+            return;
+        }
+
+        companyService.updateCompanyStatus(
+                companyField.getText(),
+                statusField.getText());
+
+        JOptionPane.showMessageDialog(null,
+                "Company Status Updated Successfully!");
+
+    }
+});
+
+deleteButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (companyField.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Enter Company Name!");
+
+            return;
+        }
+
+        int option = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to delete this company?",
+                "Confirm Delete",
+                JOptionPane.YES_NO_OPTION);
+
+        if (option == JOptionPane.YES_OPTION) {
+
+            companyService.deleteCompany(companyField.getText());
+
+            JOptionPane.showMessageDialog(null,
+                    "Company Deleted Successfully!");
+
+            companyField.setText("");
+            roleField.setText("");
+            statusField.setText("");
+        }
     }
 });
 
