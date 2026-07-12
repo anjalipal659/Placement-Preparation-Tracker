@@ -19,7 +19,7 @@ public class CodingFrame extends JFrame {
 
         setTitle("Coding Tracker");
 
-        setSize(500, 450);
+        setSize(600, 450);
 
         setLocationRelativeTo(null);
 
@@ -72,13 +72,26 @@ public class CodingFrame extends JFrame {
 
         // Save Button
         JButton saveButton = new JButton("Save");
-        saveButton.setBounds(80, 300, 120, 35);
+        saveButton.setBounds(140, 300, 120, 35);
         add(saveButton);
 
         // Show Records Button
         JButton showButton = new JButton("Show Records");
-        showButton.setBounds(230, 300, 150, 35);
+        showButton.setBounds(260, 300, 150, 35);
         add(showButton);
+
+        // Search Button
+JButton searchButton = new JButton("Search");
+searchButton.setBounds(20, 300, 100, 35);
+add(searchButton);
+
+JButton updateButton = new JButton("Update");
+updateButton.setBounds(430, 300, 100, 35);
+add(updateButton);
+
+JButton deleteButton = new JButton("Delete");
+deleteButton.setBounds(20, 360, 100, 35);
+add(deleteButton);
 
         // Save Button Action
         saveButton.addActionListener(new ActionListener() {
@@ -136,6 +149,114 @@ public class CodingFrame extends JFrame {
 
             }
         });
+
+        searchButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        CodingRecord record =
+                codingService.searchCodingRecord(platformField.getText());
+
+        if (record != null) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Platform : " + record.platform +
+                    "\nQuestions : " + record.questionsSolved +
+                    "\nDifficulty : " + record.difficulty +
+                    "\nStreak : " + record.currentStreak +
+                    "\nDate & Time : " + record.dateTime);
+
+        } else {
+
+            JOptionPane.showMessageDialog(null,
+                    "Coding Record Not Found!");
+        }
+    }
+});
+
+updateButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        try {
+
+            if (platformField.getText().isEmpty()
+                    || questionsField.getText().isEmpty()
+                    || difficultyField.getText().isEmpty()
+                    || streakField.getText().isEmpty()) {
+
+                JOptionPane.showMessageDialog(null,
+                        "Please fill all fields!");
+
+                return;
+            }
+
+            int newQuestions =
+                    Integer.parseInt(questionsField.getText());
+
+            int newStreak =
+                    Integer.parseInt(streakField.getText());
+
+            boolean updated = codingService.updateCodingRecord(
+                    platformField.getText(),
+                    newQuestions,
+                    difficultyField.getText(),
+                    newStreak);
+
+            if (updated) {
+
+                JOptionPane.showMessageDialog(null,
+                        "Coding Record Updated Successfully!");
+
+            } else {
+
+                JOptionPane.showMessageDialog(null,
+                        "Coding Record Not Found!");
+            }
+
+        } catch (NumberFormatException ex) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Please enter valid numbers!");
+        }
+    }
+});
+
+deleteButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (platformField.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Please enter platform name!");
+
+            return;
+        }
+
+        boolean deleted = codingService.deleteCodingRecord(
+                platformField.getText());
+
+        if (deleted) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Coding Record Deleted Successfully!");
+
+            platformField.setText("");
+            questionsField.setText("");
+            difficultyField.setText("");
+            streakField.setText("");
+
+        } else {
+
+            JOptionPane.showMessageDialog(null,
+                    "Coding Record Not Found!");
+        }
+    }
+});
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

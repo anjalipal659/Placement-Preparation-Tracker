@@ -36,16 +36,17 @@ public class ShowInterviewNotesFrame extends JFrame {
 
         DefaultTableModel model = new DefaultTableModel(columns, 0);
 
-        for (InterviewNote record : records) {
+       for (int i = records.size() - 1; i >= 0; i--) {
 
-            model.addRow(new Object[] {
-                    record.dateTime,
-                    record.companyName,
-                    record.interviewRound,
-                    record.notes
-            });
+    InterviewNote record = records.get(i);
 
-        }
+    model.addRow(new Object[] {
+        record.companyName,
+        record.interviewRound,
+        record.notes,
+        record.dateTime
+    });
+}
 
         JTable table = new JTable(model);
 

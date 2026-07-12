@@ -36,17 +36,17 @@ public class ShowDailyPlannerRecordsFrame extends JFrame {
 
         DefaultTableModel model = new DefaultTableModel(columns, 0);
 
-        for (DailyPlannerRecord record : records) {
+        for (int i = records.size() - 1; i >= 0; i--) {
 
-            model.addRow(new Object[] {
-                    record.dateTime,
-                    record.task,
-                    record.time,
-                    record.priority
-            });
+    DailyPlannerRecord record = records.get(i);
 
-        }
-
+    model.addRow(new Object[] {
+        record.task,
+        record.time,
+        record.priority,
+        record.dateTime
+    });
+}
         JTable table = new JTable(model);
 
         JScrollPane scrollPane = new JScrollPane(table);

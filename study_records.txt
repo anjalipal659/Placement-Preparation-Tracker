@@ -6,7 +6,7 @@ Goal : Normalization
 Date & Time : 05-07-2026 04:00 pm
 Subject : java
 Hours : 2
-Goal : oops
+Goal : Function
 --------------------------
 Date & Time : 06-07-2026 10:11 pm
 Subject : Java
@@ -22,4 +22,14 @@ Date & Time : 09-07-2026 09:10 pm
 Subject : DBMS
 Hours : 2
 Goal : Normalization
+--------------------------
+Date & Time : 12-07-2026 05:22 pm
+Subject : Java
+Hours : 2
+Goal : Function
+--------------------------
+Date & Time : 12-07-2026 05:24 pm
+Subject : Java
+Hours : 6
+Goal : 
 --------------------------

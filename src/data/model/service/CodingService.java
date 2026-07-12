@@ -115,4 +115,85 @@ record.dateTime = LocalDateTime.now().format(formatter);
 public ArrayList<CodingRecord> getAllCodingRecords() {
     return codingRecords;
 }
+
+public CodingRecord searchCodingRecord(String platformName) {
+
+    CodingRecord foundRecord = null;
+
+    for (CodingRecord record : codingRecords) {
+
+        if (record.platform.equalsIgnoreCase(platformName)) {
+            foundRecord = record;
+        }
+    }
+
+    return foundRecord;
+}
+
+public boolean updateCodingRecord(String platformName,
+                                  int newQuestions,
+                                  String newDifficulty,
+                                  int newStreak) {
+
+    for (int i = codingRecords.size() - 1; i >= 0; i--) {
+
+        CodingRecord record = codingRecords.get(i);
+
+        if (record.platform.equalsIgnoreCase(platformName)) {
+
+            record.questionsSolved = newQuestions;
+            record.difficulty = newDifficulty;
+            record.currentStreak = newStreak;
+
+            saveCodingRecordsToFile();
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+public void saveCodingRecordsToFile() {
+
+    try {
+
+        FileWriter writer = new FileWriter("coding_records.txt");
+
+        for (CodingRecord record : codingRecords) {
+
+            writer.write("Date & Time : " + record.dateTime + "\n");
+            writer.write("Platform : " + record.platform + "\n");
+            writer.write("Questions : " + record.questionsSolved + "\n");
+            writer.write("Difficulty : " + record.difficulty + "\n");
+            writer.write("Streak : " + record.currentStreak + "\n");
+            writer.write("--------------------------\n");
+        }
+
+        writer.close();
+
+    } catch (IOException e) {
+
+        System.out.println("Error Saving File!");
+    }
+}
+
+public boolean deleteCodingRecord(String platformName) {
+
+    for (int i = codingRecords.size() - 1; i >= 0; i--) {
+
+        CodingRecord record = codingRecords.get(i);
+
+        if (record.platform.equalsIgnoreCase(platformName)) {
+
+            codingRecords.remove(i);
+
+            saveCodingRecordsToFile();
+
+            return true;
+        }
+    }
+
+    return false;
+}
 }

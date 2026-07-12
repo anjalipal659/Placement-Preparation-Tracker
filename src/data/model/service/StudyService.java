@@ -104,4 +104,80 @@ while ((dateTime = reader.readLine()) != null) {
     public ArrayList<StudyRecord> getAllRecords() {
     return studyRecords;
 }
+
+public StudyRecord searchStudyRecord(String subjectName) {
+
+    StudyRecord foundRecord = null;
+
+    for (StudyRecord record : studyRecords) {
+
+        if (record.subjectName.equalsIgnoreCase(subjectName)) {
+            foundRecord = record;
+        }
+    }
+
+    return foundRecord;
+}
+
+public boolean updateStudyRecord(String subjectName, int newHours, String newGoal) {
+
+    for (int i = studyRecords.size() - 1; i >= 0; i--) {
+
+        StudyRecord record = studyRecords.get(i);
+
+        if (record.subjectName.equalsIgnoreCase(subjectName)) {
+
+            record.hoursStudied = newHours;
+            record.todayGoal = newGoal;
+
+            saveStudyRecordsToFile();
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+public void saveStudyRecordsToFile() {
+
+    try {
+
+        FileWriter writer = new FileWriter("study_records.txt");
+
+        for (StudyRecord record : studyRecords) {
+
+            writer.write("Date & Time : " + record.dateTime + "\n");
+            writer.write("Subject : " + record.subjectName + "\n");
+            writer.write("Hours : " + record.hoursStudied + "\n");
+            writer.write("Goal : " + record.todayGoal + "\n");
+            writer.write("--------------------------\n");
+        }
+
+        writer.close();
+
+    } catch (IOException e) {
+
+        System.out.println("Error Saving File!");
+    }
+}
+
+public boolean deleteStudyRecord(String subjectName) {
+
+    for (int i = studyRecords.size() - 1; i >= 0; i--) {
+
+        StudyRecord record = studyRecords.get(i);
+
+        if (record.subjectName.equalsIgnoreCase(subjectName)) {
+
+            studyRecords.remove(i);
+
+            saveStudyRecordsToFile();
+
+            return true;
+        }
+    }
+
+    return false;
+}
 }

@@ -36,16 +36,17 @@ public class ShowCodingRecordsFrame extends JFrame {
 
         DefaultTableModel model = new DefaultTableModel(columns, 0);
 
-        for (CodingRecord record : records) {
+        for (int i = records.size() - 1; i >= 0; i--) {
 
-            model.addRow(new Object[] {
-                    record.platform,
-                    record.questionsSolved,
-                    record.difficulty,
-                    record.currentStreak
-            });
+    CodingRecord record = records.get(i);
 
-        }
+    model.addRow(new Object[] {
+        record.platform,
+        record.questionsSolved,
+        record.difficulty,
+        record.currentStreak
+    });
+}
 
         JTable table = new JTable(model);
 

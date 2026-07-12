@@ -36,17 +36,17 @@ String[] columns = {
 
 DefaultTableModel model = new DefaultTableModel(columns, 0);
 
-for (StudyRecord record : records) {
+for (int i = records.size() - 1; i >= 0; i--) {
+
+    StudyRecord record = records.get(i);
 
     model.addRow(new Object[] {
-            record.dateTime,
-            record.subjectName,
-            record.hoursStudied,
-            record.todayGoal
+        record.subjectName,
+        record.hoursStudied,
+        record.todayGoal,
+        record.dateTime
     });
-
 }
-
 JTable table = new JTable(model);
 
 JScrollPane scrollPane = new JScrollPane(table);

@@ -36,16 +36,17 @@ public class ShowCompanyRecordsFrame extends JFrame {
 
         DefaultTableModel model = new DefaultTableModel(columns, 0);
 
-        for (CompanyRecord record : records) {
+        for (int i = records.size() - 1; i >= 0; i--) {
 
-            model.addRow(new Object[] {
-                    record.appliedDate,
-                    record.companyName,
-                    record.role,
-                    record.status
-            });
+    CompanyRecord record = records.get(i);
 
-        }
+    model.addRow(new Object[] {
+        record.companyName,
+        record.role,
+        record.status,
+        record.appliedDate
+    });
+}
 
         JTable table = new JTable(model);
 

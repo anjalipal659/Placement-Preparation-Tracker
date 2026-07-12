@@ -18,7 +18,7 @@ public class StudyFrame extends JFrame {
 
         setTitle("Study Tracker");
 
-        setSize(500, 400);
+        setSize(650, 450);
 
         setLocationRelativeTo(null);
 
@@ -62,13 +62,25 @@ add(goalField);
 
 JButton saveButton = new JButton("Save");
 
-saveButton.setBounds(170, 250, 120, 35);
+saveButton.setBounds(170, 250, 110, 35);
 
 add(saveButton);
 
 JButton showButton = new JButton("Show Records");
-showButton.setBounds(300, 250, 140, 35);
+showButton.setBounds(320, 250, 170, 35);
 add(showButton);
+
+JButton searchButton = new JButton("Search");
+searchButton.setBounds(20, 250, 110, 35);
+add(searchButton);
+
+JButton updateButton = new JButton("Update");
+updateButton.setBounds(500, 250, 110, 35);
+add(updateButton);
+
+JButton deleteButton = new JButton("Delete");
+deleteButton.setBounds(20, 310, 110, 35);
+add(deleteButton);
 
 showButton.addActionListener(new ActionListener() {
 
@@ -109,6 +121,106 @@ saveButton.addActionListener(new ActionListener() {
 
         }
 
+    }
+});
+
+searchButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        StudyRecord record =
+                studyService.searchStudyRecord(subjectField.getText());
+
+        if (record != null) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Subject : " + record.subjectName +
+                    "\nHours : " + record.hoursStudied +
+                    "\nGoal : " + record.todayGoal +
+                    "\nDate & Time : " + record.dateTime);
+
+        } else {
+
+            JOptionPane.showMessageDialog(null,
+                    "Study Record Not Found!");
+        }
+    }
+});
+
+updateButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        try {
+
+            if (subjectField.getText().isEmpty()
+                    || hoursField.getText().isEmpty()
+                    || goalField.getText().isEmpty()) {
+
+                JOptionPane.showMessageDialog(null,
+                        "Please fill all fields!");
+
+                return;
+            }
+
+            int newHours = Integer.parseInt(hoursField.getText());
+
+            boolean updated = studyService.updateStudyRecord(
+                    subjectField.getText(),
+                    newHours,
+                    goalField.getText());
+
+            if (updated) {
+
+                JOptionPane.showMessageDialog(null,
+                        "Study Record Updated Successfully!");
+
+            } else {
+
+                JOptionPane.showMessageDialog(null,
+                        "Study Record Not Found!");
+            }
+
+        } catch (NumberFormatException ex) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Please enter valid hours!");
+        }
+    }
+});
+
+deleteButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (subjectField.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Please enter subject name!");
+
+            return;
+        }
+
+        boolean deleted = studyService.deleteStudyRecord(
+                subjectField.getText());
+
+        if (deleted) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Study Record Deleted Successfully!");
+
+            subjectField.setText("");
+            hoursField.setText("");
+            goalField.setText("");
+
+        } else {
+
+            JOptionPane.showMessageDialog(null,
+                    "Study Record Not Found!");
+        }
     }
 });
 
