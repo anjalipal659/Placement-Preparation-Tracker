@@ -19,7 +19,7 @@ public class InterviewNoteFrame extends JFrame {
 
         setTitle("Interview Notes");
 
-        setSize(500, 400);
+        setSize(650, 450);
 
         setLocationRelativeTo(null);
 
@@ -27,6 +27,7 @@ public class InterviewNoteFrame extends JFrame {
 
         InterviewNoteService noteService = new InterviewNoteService();
         noteService.loadNotes();
+        System.out.println("Loaded Notes: " + noteService.getTotalNotes());
 
         // Title
         JLabel title = new JLabel("Interview Notes");
@@ -70,6 +71,14 @@ public class InterviewNoteFrame extends JFrame {
 showButton.setBounds(310, 250, 140, 35);
 add(showButton);
 
+JButton searchButton = new JButton("Search");
+searchButton.setBounds(20, 250, 110, 35);
+add(searchButton);
+
+JButton updateButton = new JButton("Update");
+updateButton.setBounds(470, 250, 110, 35);
+add(updateButton);
+
         saveButton.addActionListener(new ActionListener() {
 
             @Override
@@ -109,6 +118,84 @@ add(showButton);
 
         new ShowInterviewNotesFrame();
 
+    }
+});
+
+
+searchButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String companyName = JOptionPane.showInputDialog(
+                null,
+                "Enter Company Name:");
+
+        if (companyName == null || companyName.trim().isEmpty()) {
+            return;
+        }
+
+        System.out.println(
+                "Searching Company: [" + companyName + "]");
+
+        InterviewNote note =
+                noteService.searchNote(companyName.trim());
+
+        if (note != null) {
+
+            companyField.setText(note.companyName);
+            roundField.setText(note.interviewRound);
+            notesField.setText(note.notes);
+
+            JOptionPane.showMessageDialog(null,
+                    "Interview Note Found!");
+
+        } else {
+
+            JOptionPane.showMessageDialog(null,
+                    "Interview Note Not Found!");
+        }
+    }
+});
+
+
+updateButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String companyName = JOptionPane.showInputDialog(
+                null,
+                "Enter Company Name to Update:");
+
+        if (companyName == null || companyName.trim().isEmpty()) {
+            return;
+        }
+
+        if (roundField.getText().trim().isEmpty()
+                || notesField.getText().trim().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Enter New Round and Notes!");
+
+            return;
+        }
+
+        boolean updated = noteService.updateNote(
+                companyName.trim(),
+                roundField.getText().trim(),
+                notesField.getText().trim());
+
+        if (updated) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Interview Note Updated Successfully!");
+
+        } else {
+
+            JOptionPane.showMessageDialog(null,
+                    "Interview Note Not Found!");
+        }
     }
 });
 

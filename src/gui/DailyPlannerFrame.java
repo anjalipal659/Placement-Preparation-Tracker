@@ -19,7 +19,7 @@ public class DailyPlannerFrame extends JFrame {
 
         setTitle("Daily Planner");
 
-        setSize(500, 400);
+        setSize(650, 450);
 
         setLocationRelativeTo(null);
 
@@ -27,6 +27,7 @@ public class DailyPlannerFrame extends JFrame {
 
         DailyPlannerService plannerService = new DailyPlannerService();
         plannerService.loadPlans();
+        System.out.println("Loaded Plans: " + plannerService.getTotalPlans());
 
         // Title
         JLabel title = new JLabel("Daily Planner");
@@ -63,12 +64,26 @@ public class DailyPlannerFrame extends JFrame {
 
         // Save Button
         JButton saveButton = new JButton("Save");
-        saveButton.setBounds(170, 250, 120, 35);
+        saveButton.setBounds(160, 250, 110, 35);
         add(saveButton);
 
        JButton showButton = new JButton("Show Records");
-showButton.setBounds(310, 250, 140, 35);
+showButton.setBounds(300, 250, 150, 35);
 add(showButton);
+
+JButton searchButton = new JButton("Search");
+searchButton.setBounds(20, 250, 110, 35);
+add(searchButton);
+
+JButton updateButton = new JButton("Update");
+updateButton.setBounds(470, 250, 110, 35);
+add(updateButton);
+
+JButton deleteButton = new JButton("Delete");
+deleteButton.setBounds(20, 310, 110, 35);
+add(deleteButton);
+
+
         saveButton.addActionListener(new ActionListener() {
 
             @Override
@@ -110,7 +125,124 @@ add(showButton);
 
     }
 });
+System.out.println("Searching: [" + taskField.getText() + "]");
+
+searchButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String taskName = JOptionPane.showInputDialog(
+                null,
+                "Enter Task Name:");
+
+        if (taskName == null || taskName.trim().isEmpty()) {
+            return;
+        }
+
+        DailyPlannerRecord plan =
+                plannerService.searchPlan(taskName.trim());
+
+        if (plan != null) {
+
+            taskField.setText(plan.task);
+            timeField.setText(plan.time);
+            priorityField.setText(plan.priority);
+
+            JOptionPane.showMessageDialog(null,
+                    "Plan Found!");
+
+        } else {
+
+            JOptionPane.showMessageDialog(null,
+                    "Plan Not Found!");
+        }
+    }
+});
+
+
+
+
+updateButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String taskName = JOptionPane.showInputDialog(
+                null,
+                "Enter Task Name to Update:");
+
+        if (taskName == null || taskName.trim().isEmpty()) {
+            return;
+        }
+
+        if (timeField.getText().trim().isEmpty()
+                || priorityField.getText().trim().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Enter New Time and Priority!");
+
+            return;
+        }
+
+        boolean updated = plannerService.updatePlan(
+                taskName.trim(),
+                timeField.getText().trim(),
+                priorityField.getText().trim());
+
+        if (updated) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Plan Updated Successfully!");
+
+        } else {
+
+            JOptionPane.showMessageDialog(null,
+                    "Plan Not Found!");
+        }
+    }
+});
+
+
+deleteButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String taskName = JOptionPane.showInputDialog(
+                null,
+                "Enter Task Name to Delete:");
+
+        if (taskName == null || taskName.trim().isEmpty()) {
+            return;
+        }
+
+        int option = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to delete this plan?",
+                "Confirm Delete",
+                JOptionPane.YES_NO_OPTION);
+
+        if (option == JOptionPane.YES_OPTION) {
+
+            boolean deleted = plannerService.deletePlan(taskName.trim());
+
+            if (deleted) {
+
+                JOptionPane.showMessageDialog(null,
+                        "Plan Deleted Successfully!");
+
+            } else {
+
+                JOptionPane.showMessageDialog(null,
+                        "Plan Not Found!");
+            }
+        }
+    }
+});
 
         setVisible(true);
     }
+
+
 }

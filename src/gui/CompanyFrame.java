@@ -19,7 +19,7 @@ public class CompanyFrame extends JFrame {
 
         setTitle("Company Tracker");
 
-        setSize(550, 450);
+        setSize(650, 450);
 
         setLocationRelativeTo(null);
 

@@ -98,4 +98,66 @@ note.dateTime = LocalDateTime.now().format(formatter);
     public ArrayList<InterviewNote> getAllNotes() {
     return interviewNotes;
 }
+
+public InterviewNote searchNote(String companyName) {
+
+    for (int i = interviewNotes.size() - 1; i >= 0; i--) {
+
+        InterviewNote note = interviewNotes.get(i);
+
+        if (note.companyName.trim()
+                .equalsIgnoreCase(companyName.trim())) {
+
+            return note;
+        }
+    }
+
+    return null;
+}
+
+public boolean updateNote(String companyName,
+                          String newRound,
+                          String newNotes) {
+
+    for (int i = interviewNotes.size() - 1; i >= 0; i--) {
+
+        InterviewNote note = interviewNotes.get(i);
+
+        if (note.companyName.trim()
+                .equalsIgnoreCase(companyName.trim())) {
+
+            note.interviewRound = newRound;
+            note.notes = newNotes;
+
+            saveAllNotes();
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+private void saveAllNotes() {
+
+    try {
+
+        FileWriter writer = new FileWriter("interview_notes.txt");
+
+        for (InterviewNote note : interviewNotes) {
+
+            writer.write("Date & Time : " + note.dateTime + "\n");
+            writer.write("Company : " + note.companyName + "\n");
+            writer.write("Round : " + note.interviewRound + "\n");
+            writer.write("Notes : " + note.notes + "\n");
+            writer.write("--------------------------\n");
+        }
+
+        writer.close();
+
+    } catch (IOException e) {
+
+        System.out.println("Error Updating Interview Notes File!");
+    }
+}
 }

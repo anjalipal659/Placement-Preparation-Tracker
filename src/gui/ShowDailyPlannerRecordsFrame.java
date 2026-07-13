@@ -41,11 +41,11 @@ public class ShowDailyPlannerRecordsFrame extends JFrame {
     DailyPlannerRecord record = records.get(i);
 
     model.addRow(new Object[] {
-        record.task,
-        record.time,
-        record.priority,
-        record.dateTime
-    });
+    record.dateTime,
+    record.task,
+    record.time,
+    record.priority
+});
 }
         JTable table = new JTable(model);
 
