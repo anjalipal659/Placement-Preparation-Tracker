@@ -137,7 +137,25 @@ public boolean updateNote(String companyName,
 
     return false;
 }
+public boolean deleteNote(String companyName) {
 
+    for (int i = interviewNotes.size() - 1; i >= 0; i--) {
+
+        InterviewNote note = interviewNotes.get(i);
+
+        if (note.companyName.trim()
+                .equalsIgnoreCase(companyName.trim())) {
+
+            interviewNotes.remove(i);
+
+            saveAllNotes();
+
+            return true;
+        }
+    }
+
+    return false;
+}
 private void saveAllNotes() {
 
     try {

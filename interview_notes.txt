@@ -18,8 +18,3 @@ Company : IBM
 Round : HR
 Notes : Python
 --------------------------
-Date & Time : 13-07-2026 10:33 pm
-Company : Google
-Round : Technical
-Notes : Python
---------------------------

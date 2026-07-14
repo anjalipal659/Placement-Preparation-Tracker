@@ -79,6 +79,10 @@ JButton updateButton = new JButton("Update");
 updateButton.setBounds(470, 250, 110, 35);
 add(updateButton);
 
+JButton deleteButton = new JButton("Delete");
+deleteButton.setBounds(240, 310, 110, 35);
+add(deleteButton);
+
         saveButton.addActionListener(new ActionListener() {
 
             @Override
@@ -195,6 +199,48 @@ updateButton.addActionListener(new ActionListener() {
 
             JOptionPane.showMessageDialog(null,
                     "Interview Note Not Found!");
+        }
+    }
+});
+
+deleteButton.addActionListener(new ActionListener() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String companyName = JOptionPane.showInputDialog(
+                null,
+                "Enter Company Name to Delete:");
+
+        if (companyName == null || companyName.trim().isEmpty()) {
+            return;
+        }
+
+        int option = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to delete this interview note?",
+                "Confirm Delete",
+                JOptionPane.YES_NO_OPTION);
+
+        if (option == JOptionPane.YES_OPTION) {
+
+            boolean deleted =
+                    noteService.deleteNote(companyName.trim());
+
+            if (deleted) {
+
+                JOptionPane.showMessageDialog(null,
+                        "Interview Note Deleted Successfully!");
+
+                companyField.setText("");
+                roundField.setText("");
+                notesField.setText("");
+
+            } else {
+
+                JOptionPane.showMessageDialog(null,
+                        "Interview Note Not Found!");
+            }
         }
     }
 });
