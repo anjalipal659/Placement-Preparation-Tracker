@@ -13,6 +13,15 @@ public class GoalService {
     private final String CODING_GOAL_FILE =
             "coding_goal.txt";
 
+    private final String COMPANY_GOAL_FILE =
+            "company_goal.txt";
+
+     private final String PLANNER_GOAL_FILE =
+        "planner_goal.txt";
+
+        private final String INTERVIEW_GOAL_FILE =
+        "interview_goal.txt";
+
     // ================= STUDY GOAL =================
 
     public void saveStudyGoal(int goal) {
@@ -37,6 +46,42 @@ public class GoalService {
         return loadGoal(CODING_GOAL_FILE, 100);
     }
 
+
+    // ================= COMPANY GOAL =================
+
+public void saveCompanyGoal(int goal) {
+
+    saveGoal(COMPANY_GOAL_FILE, goal);
+}
+
+public int loadCompanyGoal() {
+
+    return loadGoal(COMPANY_GOAL_FILE, 50);
+}
+
+// ================= PLANNER GOAL =================
+
+public void savePlannerGoal(int goal) {
+
+    saveGoal(PLANNER_GOAL_FILE, goal);
+}
+
+public int loadPlannerGoal() {
+
+    return loadGoal(PLANNER_GOAL_FILE, 30);
+}
+
+// ================= INTERVIEW GOAL =================
+
+public void saveInterviewGoal(int goal) {
+
+    saveGoal(INTERVIEW_GOAL_FILE, goal);
+}
+
+public int loadInterviewGoal() {
+
+    return loadGoal(INTERVIEW_GOAL_FILE, 20);
+}
     // ================= SAVE GOAL =================
 
     private void saveGoal(String fileName, int goal) {

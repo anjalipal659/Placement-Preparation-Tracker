@@ -51,6 +51,9 @@ public class DashboardFrame extends JFrame {
 
         int studyGoal = goalService.loadStudyGoal();
         int codingGoal = goalService.loadCodingGoal();
+        int companyGoal = goalService.loadCompanyGoal();
+        int plannerGoal = goalService.loadPlannerGoal();
+        int interviewGoal = goalService.loadInterviewGoal();
 
         // ================= TITLE =================
 
@@ -160,8 +163,7 @@ studyCard.add(updateGoalButton);
 
         dashboardPanel.add(studyCard);
 
-        // ================= CODING CARD =================
-
+        
       // ================= CODING CARD =================
 
 JPanel codingCard = createCard("CODING");
@@ -248,54 +250,246 @@ dashboardPanel.add(codingCard);
 
         // ================= COMPANY CARD =================
 
-        JPanel companyCard =
-                createCard("COMPANIES");
+JPanel companyCard = createCard("COMPANIES");
 
-        companyCard.add(new JLabel(
-                "Applied : "
-                        + companyService
-                        .getTotalCompanies()));
+companyCard.add(new JLabel(
+        "Applied : "
+                + companyService.getTotalCompanies()));
 
-        companyCard.add(new JLabel(
-                "Selected : "
-                        + companyService
-                        .getSelectedCompanies()));
+companyCard.add(new JLabel(
+        "Selected : "
+                + companyService.getSelectedCompanies()));
 
-        companyCard.add(new JLabel(
-                "Rejected : "
-                        + companyService
-                        .getRejectedCompanies()));
+int appliedCompanies =
+        companyService.getTotalCompanies();
 
-        companyCard.add(new JLabel(
-                "Pending : "
-                        + companyService
-                        .getPendingCompanies()));
+JProgressBar companyProgress =
+        new JProgressBar(0, companyGoal);
 
-        dashboardPanel.add(companyCard);
+companyProgress.setValue(
+        Math.min(appliedCompanies, companyGoal));
 
+companyProgress.setStringPainted(true);
+
+companyProgress.setString(
+        appliedCompanies + " / "
+                + companyGoal + " Companies");
+
+companyCard.add(companyProgress);
+
+JButton updateCompanyGoalButton =
+        new JButton("Update Goal");
+
+updateCompanyGoalButton.addActionListener(e -> {
+
+    String goalInput = JOptionPane.showInputDialog(
+            this,
+            "Enter New Company Application Goal:");
+
+    if (goalInput == null
+            || goalInput.trim().isEmpty()) {
+        return;
+    }
+
+    try {
+
+        int newGoal =
+                Integer.parseInt(goalInput.trim());
+
+        if (newGoal <= 0) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Goal must be greater than 0!");
+
+            return;
+        }
+
+        goalService.saveCompanyGoal(newGoal);
+
+        companyProgress.setMaximum(newGoal);
+
+        companyProgress.setValue(
+                Math.min(appliedCompanies, newGoal));
+
+        companyProgress.setString(
+                appliedCompanies + " / "
+                        + newGoal + " Companies");
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Company Goal Updated Successfully!");
+
+    } catch (NumberFormatException ex) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Please enter a valid number!");
+    }
+});
+
+companyCard.add(updateCompanyGoalButton);
+
+dashboardPanel.add(companyCard);
         // ================= DAILY PLANNER =================
 
-        JPanel plannerCard =
-                createCard("DAILY PLANNER");
+JPanel plannerCard =
+        createCard("DAILY PLANNER");
 
-        plannerCard.add(new JLabel(
-                "Total Plans : "
-                        + plannerService
-                        .getTotalPlans()));
+int totalPlans =
+        plannerService.getTotalPlans();
 
-        dashboardPanel.add(plannerCard);
+plannerCard.add(new JLabel(
+        "Total Plans : " + totalPlans));
 
-        // ================= INTERVIEW NOTES =================
+JProgressBar plannerProgress =
+        new JProgressBar(0, plannerGoal);
 
-        JPanel interviewCard =
-                createCard("INTERVIEW NOTES");
+plannerProgress.setValue(
+        Math.min(totalPlans, plannerGoal));
 
-        interviewCard.add(new JLabel(
-                "Total Notes : "
-                        + noteService
-                        .getTotalNotes()));
+plannerProgress.setStringPainted(true);
 
-        dashboardPanel.add(interviewCard);
+plannerProgress.setString(
+        totalPlans + " / "
+                + plannerGoal + " Plans");
+
+plannerCard.add(plannerProgress);
+
+JButton updatePlannerGoalButton =
+        new JButton("Update Goal");
+
+updatePlannerGoalButton.addActionListener(e -> {
+
+    String goalInput = JOptionPane.showInputDialog(
+            this,
+            "Enter New Daily Planner Goal:");
+
+    if (goalInput == null
+            || goalInput.trim().isEmpty()) {
+        return;
+    }
+
+    try {
+
+        int newGoal =
+                Integer.parseInt(goalInput.trim());
+
+        if (newGoal <= 0) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Goal must be greater than 0!");
+
+            return;
+        }
+
+        goalService.savePlannerGoal(newGoal);
+
+        plannerProgress.setMaximum(newGoal);
+
+        plannerProgress.setValue(
+                Math.min(totalPlans, newGoal));
+
+        plannerProgress.setString(
+                totalPlans + " / "
+                        + newGoal + " Plans");
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Planner Goal Updated Successfully!");
+
+    } catch (NumberFormatException ex) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Please enter a valid number!");
+    }
+});
+
+plannerCard.add(updatePlannerGoalButton);
+
+dashboardPanel.add(plannerCard);
+        
+       // ================= INTERVIEW NOTES =================
+
+JPanel interviewCard =
+        createCard("INTERVIEW NOTES");
+
+int totalNotes =
+        noteService.getTotalNotes();
+
+interviewCard.add(new JLabel(
+        "Total Notes : " + totalNotes));
+
+JProgressBar interviewProgress =
+        new JProgressBar(0, interviewGoal);
+
+interviewProgress.setValue(
+        Math.min(totalNotes, interviewGoal));
+
+interviewProgress.setStringPainted(true);
+
+interviewProgress.setString(
+        totalNotes + " / "
+                + interviewGoal + " Notes");
+
+interviewCard.add(interviewProgress);
+
+JButton updateInterviewGoalButton =
+        new JButton("Update Goal");
+
+updateInterviewGoalButton.addActionListener(e -> {
+
+    String goalInput = JOptionPane.showInputDialog(
+            this,
+            "Enter New Interview Notes Goal:");
+
+    if (goalInput == null
+            || goalInput.trim().isEmpty()) {
+        return;
+    }
+
+    try {
+
+        int newGoal =
+                Integer.parseInt(goalInput.trim());
+
+        if (newGoal <= 0) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Goal must be greater than 0!");
+
+            return;
+        }
+
+        goalService.saveInterviewGoal(newGoal);
+
+        interviewProgress.setMaximum(newGoal);
+
+        interviewProgress.setValue(
+                Math.min(totalNotes, newGoal));
+
+        interviewProgress.setString(
+                totalNotes + " / "
+                        + newGoal + " Notes");
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Interview Goal Updated Successfully!");
+
+    } catch (NumberFormatException ex) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Please enter a valid number!");
+    }
+});
+
+interviewCard.add(updateInterviewGoalButton);
+
+dashboardPanel.add(interviewCard);
 
         // ================= FRAME =================
 
