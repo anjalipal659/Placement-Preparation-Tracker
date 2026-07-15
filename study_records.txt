@@ -33,3 +33,8 @@ Subject : Java
 Hours : 6
 Goal : 
 --------------------------
+Date & Time : 15-07-2026 10:42 pm
+Subject : Python
+Hours : 5
+Goal : Numpy
+--------------------------

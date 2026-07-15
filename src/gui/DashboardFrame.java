@@ -17,13 +17,15 @@ import data.model.service.DailyPlannerService;
 import data.model.service.InterviewNoteService;
 import data.model.service.StudyService;
 import data.model.service.GoalService;
+import javax.swing.JButton;
+import javax.swing.JButton;
 
 public class DashboardFrame extends JFrame {
 
     public DashboardFrame() {
 
         setTitle("Dashboard");
-        setSize(750, 550);
+        setSize(750, 570);
         setLocationRelativeTo(null);
         setLayout(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -77,6 +79,12 @@ public class DashboardFrame extends JFrame {
                 new GridLayout(2, 3, 15, 15));
 
         add(dashboardPanel);
+
+        
+
+
+
+
 
         // ================= STUDY CARD =================
 
@@ -491,10 +499,31 @@ interviewCard.add(updateInterviewGoalButton);
 
 dashboardPanel.add(interviewCard);
 
-        // ================= FRAME =================
 
-        setVisible(true);
-    }
+JButton weeklyButton = new JButton("Weekly Progress");
+weeklyButton.setBounds(70, 470, 180, 35);
+add(weeklyButton);
+
+weeklyButton.addActionListener(e ->
+        new WeeklyProgressFrame());
+
+JButton monthlyButton = new JButton("Monthly Progress");
+monthlyButton.setBounds(270, 470, 180, 35);
+add(monthlyButton);
+
+monthlyButton.addActionListener(e ->
+        new MonthlyProgressFrame());
+
+JButton yearlyButton = new JButton("Yearly Progress");
+yearlyButton.setBounds(470, 470, 180, 35);
+add(yearlyButton);
+
+yearlyButton.addActionListener(e ->
+        new YearlyProgressFrame());
+
+setVisible(true);
+    
+}       
 
     private JPanel createCard(String cardTitle) {
 
