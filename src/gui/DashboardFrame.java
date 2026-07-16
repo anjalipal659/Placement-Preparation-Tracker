@@ -19,6 +19,8 @@ import data.model.service.StudyService;
 import data.model.service.GoalService;
 import javax.swing.JButton;
 import javax.swing.JButton;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DashboardFrame extends JFrame {
 
@@ -67,6 +69,24 @@ public class DashboardFrame extends JFrame {
                 new Font("Arial", Font.BOLD, 22));
 
         add(title);
+
+        DateTimeFormatter formatter =
+        DateTimeFormatter.ofPattern(
+                "dd MMM yyyy   hh:mm a");
+
+JLabel dateTimeLabel =
+        new JLabel(
+                "Today : "
+                        + LocalDateTime.now()
+                                .format(formatter));
+
+dateTimeLabel.setBounds(
+        210,
+        55,
+        350,
+        20);
+
+add(dateTimeLabel);
 
         // ================= DASHBOARD PANEL =================
 
