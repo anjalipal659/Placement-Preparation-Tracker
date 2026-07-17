@@ -160,6 +160,17 @@ public int getPendingCompanies() {
     return count;
 }
 
+public int getSuccessRate() {
+
+    int total = getTotalCompanies();
+
+    if (total == 0) {
+        return 0;
+    }
+
+    return (getSelectedCompanies() * 100) / total;
+}
+
 public CompanyRecord searchCompany(String companyName) {
 
     for (CompanyRecord c : companyRecords) {

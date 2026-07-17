@@ -279,6 +279,7 @@ dashboardPanel.add(codingCard);
         // ================= COMPANY CARD =================
 
 JPanel companyCard = createCard("COMPANIES");
+companyCard.setLayout(new GridLayout(7, 1, 5, 5));
 
 companyCard.add(new JLabel(
         "Applied : "
@@ -287,6 +288,19 @@ companyCard.add(new JLabel(
 companyCard.add(new JLabel(
         "Selected : "
                 + companyService.getSelectedCompanies()));
+
+                companyCard.add(new JLabel(
+        "Rejected : "
+                + companyService.getRejectedCompanies()));
+
+companyCard.add(new JLabel(
+        "Pending : "
+                + companyService.getPendingCompanies()));
+
+companyCard.add(new JLabel(
+        "Success Rate : "
+                + companyService.getSuccessRate()
+                + "%"));
 
 int appliedCompanies =
         companyService.getTotalCompanies();
@@ -450,6 +464,14 @@ int totalNotes =
 interviewCard.add(new JLabel(
         "Total Notes : " + totalNotes));
 
+        interviewCard.add(new JLabel(
+        "Technical : "
+                + noteService.getTechnicalRounds()));
+
+interviewCard.add(new JLabel(
+        "HR : "
+                + noteService.getHRRounds()));
+
 JProgressBar interviewProgress =
         new JProgressBar(0, interviewGoal);
 
@@ -540,6 +562,11 @@ add(yearlyButton);
 
 yearlyButton.addActionListener(e ->
         new YearlyProgressFrame());
+
+        JLabel versionLabel = new JLabel("Version 1.2");
+versionLabel.setBounds(620, 530, 100, 20);
+versionLabel.setFont(new Font("Arial", Font.PLAIN, 11));
+add(versionLabel);
 
 setVisible(true);
     

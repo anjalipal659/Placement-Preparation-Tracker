@@ -99,6 +99,37 @@ note.dateTime = LocalDateTime.now().format(formatter);
     return interviewNotes;
 }
 
+public int getTechnicalRounds() {
+
+    int count = 0;
+
+    for (InterviewNote note : interviewNotes) {
+
+        if (note.interviewRound
+                .equalsIgnoreCase("Technical")) {
+
+            count++;
+        }
+    }
+
+    return count;
+}
+
+public int getHRRounds() {
+
+    int count = 0;
+
+    for (InterviewNote note : interviewNotes) {
+
+        if (note.interviewRound
+                .equalsIgnoreCase("HR")) {
+
+            count++;
+        }
+    }
+
+    return count;
+}
 public InterviewNote searchNote(String companyName) {
 
     for (int i = interviewNotes.size() - 1; i >= 0; i--) {
