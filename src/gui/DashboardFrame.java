@@ -27,7 +27,7 @@ public class DashboardFrame extends JFrame {
     public DashboardFrame() {
 
         setTitle("Dashboard");
-        setSize(750, 570);
+        setSize(750, 760);
         setLocationRelativeTo(null);
         setLayout(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -93,7 +93,7 @@ add(dateTimeLabel);
         JPanel dashboardPanel = new JPanel();
 
         dashboardPanel.setBounds(
-                40, 80, 650, 370);
+                40, 80, 650, 470);
 
         dashboardPanel.setLayout(
                 new GridLayout(2, 3, 15, 15));
@@ -288,10 +288,6 @@ companyCard.add(new JLabel(
 companyCard.add(new JLabel(
         "Selected : "
                 + companyService.getSelectedCompanies()));
-
-                companyCard.add(new JLabel(
-        "Rejected : "
-                + companyService.getRejectedCompanies()));
 
 companyCard.add(new JLabel(
         "Pending : "
@@ -541,23 +537,41 @@ interviewCard.add(updateInterviewGoalButton);
 
 dashboardPanel.add(interviewCard);
 
+// ================= ANALYTICS CARD =================
+
+JPanel analyticsCard = createCard("ANALYTICS");
+
+analyticsCard.add(new JLabel(
+        "Study Days : "
+                + studyService.getTotalStudyDays()));
+
+analyticsCard.add(new JLabel(
+        "Most Studied : "
+                + studyService.getMostStudiedSubject()));
+
+analyticsCard.add(new JLabel(
+        "Best Day : "
+                + studyService.getBestStudyDay()));
+
+dashboardPanel.add(analyticsCard);
+
 
 JButton weeklyButton = new JButton("Weekly Progress");
-weeklyButton.setBounds(70, 470, 180, 35);
+weeklyButton.setBounds(70, 570, 180, 35);
 add(weeklyButton);
 
 weeklyButton.addActionListener(e ->
         new WeeklyProgressFrame());
 
 JButton monthlyButton = new JButton("Monthly Progress");
-monthlyButton.setBounds(270, 470, 180, 35);
+monthlyButton.setBounds(270, 570, 180, 35);
 add(monthlyButton);
 
 monthlyButton.addActionListener(e ->
         new MonthlyProgressFrame());
 
 JButton yearlyButton = new JButton("Yearly Progress");
-yearlyButton.setBounds(470, 470, 180, 35);
+yearlyButton.setBounds(470, 570, 180, 35);
 add(yearlyButton);
 
 yearlyButton.addActionListener(e ->

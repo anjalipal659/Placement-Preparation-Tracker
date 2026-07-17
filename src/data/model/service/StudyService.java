@@ -180,4 +180,63 @@ public boolean deleteStudyRecord(String subjectName) {
 
     return false;
 }
+
+public String getMostStudiedSubject() {
+
+    if (studyRecords.isEmpty()) {
+        return "No Data";
+    }
+
+    String subject = "";
+    int maxHours = 0;
+
+    for (StudyRecord record : studyRecords) {
+
+        if (record.hoursStudied > maxHours) {
+
+            maxHours = record.hoursStudied;
+            subject = record.subjectName;
+        }
+    }
+
+    return subject + " (" + maxHours + " hrs)";
+}
+
+public int getTotalStudyDays() {
+
+    java.util.HashSet<String> days =
+            new java.util.HashSet<>();
+
+    for (StudyRecord record : studyRecords) {
+
+        if (record.dateTime.length() >= 10) {
+
+            days.add(record.dateTime.substring(0, 10));
+        }
+    }
+
+    return days.size();
+}
+
+public String getBestStudyDay() {
+
+    if (studyRecords.isEmpty()) {
+
+        return "No Data";
+    }
+
+    String bestDay = "";
+    int maxHours = 0;
+
+    for (StudyRecord record : studyRecords) {
+
+        if (record.hoursStudied > maxHours) {
+
+            maxHours = record.hoursStudied;
+            bestDay = record.dateTime.substring(0, 10);
+        }
+    }
+
+    return bestDay + " (" + maxHours + " hrs)";
+}
 }
