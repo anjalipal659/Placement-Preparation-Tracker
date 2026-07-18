@@ -553,6 +553,11 @@ analyticsCard.add(new JLabel(
         "Best Day : "
                 + studyService.getBestStudyDay()));
 
+                analyticsCard.add(new JLabel(
+        "Study Streak : "
+                + studyService.getStudyStreak()
+                + " Days"));
+
 dashboardPanel.add(analyticsCard);
 
 
@@ -581,6 +586,32 @@ yearlyButton.addActionListener(e ->
 versionLabel.setBounds(620, 530, 100, 20);
 versionLabel.setFont(new Font("Arial", Font.PLAIN, 11));
 add(versionLabel);
+
+// ================= SUMMARY CARD =================
+
+JPanel summaryCard = createCard("SUMMARY");
+
+summaryCard.add(new JLabel(
+        "Study Hours : "
+                + studyService.getTotalStudyHours()));
+
+summaryCard.add(new JLabel(
+        "Coding Questions : "
+                + codingService.getTotalQuestionsSolved()));
+
+summaryCard.add(new JLabel(
+        "Companies : "
+                + companyService.getTotalCompanies()));
+
+summaryCard.add(new JLabel(
+        "Plans : "
+                + plannerService.getTotalPlans()));
+
+summaryCard.add(new JLabel(
+        "Interview Notes : "
+                + noteService.getTotalNotes()));
+
+dashboardPanel.add(summaryCard);
 
 setVisible(true);
     

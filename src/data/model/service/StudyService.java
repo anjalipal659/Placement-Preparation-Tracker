@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
 public class StudyService {
     ArrayList<StudyRecord> studyRecords = new ArrayList<>();
     public void addRecord(StudyRecord record) {
@@ -238,5 +241,69 @@ public String getBestStudyDay() {
     }
 
     return bestDay + " (" + maxHours + " hrs)";
+}
+
+public int getStudyStreak() {
+
+    if (studyRecords.isEmpty()) {
+        return 0;
+    }
+
+    HashSet<LocalDate> uniqueDates = new HashSet<>();
+
+    DateTimeFormatter formatter =
+            DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+    for (StudyRecord record : studyRecords) {
+
+        try {
+
+            String date =
+                    record.dateTime.substring(0, 10);
+
+            uniqueDates.add(
+                    LocalDate.parse(date, formatter));
+
+        } catch (Exception e) {
+
+            // Ignore invalid dates
+        }
+    }
+
+    ArrayList<LocalDate> dates =
+            new ArrayList<>(uniqueDates);
+
+    dates.sort(null);
+
+    if (dates.isEmpty()) {
+        return 0;
+    }
+
+    int streak = 1;
+    int maxStreak = 1;
+
+    for (int i = 1; i < dates.size(); i++) {
+
+        long days =
+                ChronoUnit.DAYS.between(
+                        dates.get(i - 1),
+                        dates.get(i));
+
+        if (days == 1) {
+
+            streak++;
+
+        } else {
+
+            streak = 1;
+        }
+
+        if (streak > maxStreak) {
+
+            maxStreak = streak;
+        }
+    }
+
+    return maxStreak;
 }
 }
