@@ -1,5 +1,5 @@
 package data.model.service;
 
-public class ReportService {
-    
+public void exportReport() {
+
 }

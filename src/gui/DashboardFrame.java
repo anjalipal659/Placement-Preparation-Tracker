@@ -27,7 +27,7 @@ public class DashboardFrame extends JFrame {
     public DashboardFrame() {
 
         setTitle("Dashboard");
-        setSize(750, 760);
+        setSize(750, 610);
         setLocationRelativeTo(null);
         setLayout(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -93,7 +93,7 @@ add(dateTimeLabel);
         JPanel dashboardPanel = new JPanel();
 
         dashboardPanel.setBounds(
-                40, 80, 650, 470);
+                40, 80, 650, 390);
 
         dashboardPanel.setLayout(
                 new GridLayout(2, 3, 15, 15));
@@ -562,21 +562,21 @@ dashboardPanel.add(analyticsCard);
 
 
 JButton weeklyButton = new JButton("Weekly Progress");
-weeklyButton.setBounds(70, 570, 180, 35);
+weeklyButton.setBounds(70, 470, 180, 35);
 add(weeklyButton);
 
 weeklyButton.addActionListener(e ->
         new WeeklyProgressFrame());
 
 JButton monthlyButton = new JButton("Monthly Progress");
-monthlyButton.setBounds(270, 570, 180, 35);
+monthlyButton.setBounds(270, 470, 180, 35);
 add(monthlyButton);
 
 monthlyButton.addActionListener(e ->
         new MonthlyProgressFrame());
 
 JButton yearlyButton = new JButton("Yearly Progress");
-yearlyButton.setBounds(470, 570, 180, 35);
+yearlyButton.setBounds(470, 470, 180, 35);
 add(yearlyButton);
 
 yearlyButton.addActionListener(e ->
