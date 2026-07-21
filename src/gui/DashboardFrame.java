@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JButton;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import data.model.service.ReportService;
 
 public class DashboardFrame extends JFrame {
 
@@ -581,6 +582,21 @@ add(yearlyButton);
 
 yearlyButton.addActionListener(e ->
         new YearlyProgressFrame());
+
+        JButton reportButton = new JButton("Export Report");
+reportButton.setBounds(270, 530, 180, 35);
+add(reportButton);
+
+ReportService reportService = new ReportService();
+
+reportButton.addActionListener(e -> {
+
+    reportService.exportReport();
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Report Generated Successfully!");
+});
 
         JLabel versionLabel = new JLabel("Version 1.2");
 versionLabel.setBounds(620, 530, 100, 20);
